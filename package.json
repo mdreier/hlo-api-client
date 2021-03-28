@@ -1,0 +1,23 @@
+{
+  "name": "hlo-api",
+  "version": "1.0.0",
+  "description": "Access to the HeroLab Online API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdreier/hlo-api.git"
+  },
+  "keywords": [
+    "herolab",
+    "rpg"
+  ],
+  "author": "Martin Dreier <martin@martindreier.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mdreier/hlo-api/issues"
+  },
+  "homepage": "https://github.com/mdreier/hlo-api#readme"
+}
