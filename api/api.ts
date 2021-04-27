@@ -7,6 +7,21 @@ const STANDARD_HEADERS = {
     "Content-Type": 'application/json'
 }
 
+async function printResponse(response: Response): Promise<Response> {
+    let text = await response.text();
+    console.debug(text);
+    response.json = () => JSON.parse(text);
+    return response;
+}
+
+function validateResponse(response: Response) {
+    if (response.ok) {
+        return response;
+    } else {
+        throw new Error("Invalid API call");
+    }
+}
+
 class HLOApi {
 
     /**
@@ -39,6 +54,8 @@ class HLOApi {
         console.debug("Sending request to " + endpoint);
 
         return this._fetch(endpoint, { method: 'POST', body: JSON.stringify(request), headers: STANDARD_HEADERS })
+            .then(validateResponse)
+            .then(printResponse)
             .then(response => response.json())
             .then(body => body as HLOApiResponse);
     }

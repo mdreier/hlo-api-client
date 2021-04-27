@@ -27,13 +27,12 @@ describe('Access Tokens', () => {
         expect(response.result).toBe(ResultCode.BadApiToken);
     });
 
-    it('Missing tool name should fail', async () => {
+    it('Missing tool name should raise error', async () => {
 
         let api = new HLOApi(new ApiMock().mock());
-        let response = await api.acquireAccessToken({
+        api.acquireAccessToken({
             refreshToken: Tokens.valid.user
-        } as AcquireAccessTokenRequest);
+        } as AcquireAccessTokenRequest).then(fail).catch(() => {});
 
-        expect(response.severity).toBe(Severity.Error);
     });
 });
