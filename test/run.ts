@@ -1,14 +1,7 @@
 import jasmine from './jasmine.js'
 import fs from 'fs-extra'
 
-//Helpers
 loadHelpers().then(loadSpecs).then(() => jasmine.execute()).catch(console.log);
-//import hloApiMocks from '../spec/helpers/hloApiMock.js'
-
-//Specs
-//import '../spec/First.spec.js'
-
-//jasmine.execute()
 
 async function loadHelpers(): Promise<any> {
     return importFiles('spec/helpers', '.ts');
@@ -27,8 +20,8 @@ async function importFiles(folder: string, extension: string): Promise<any> {
     return fs.readdir('./' + folder)                                    //Relative to project directory
             .then(files => Promise.all(
                 files
-                    .filter(file => file.endsWith(extension))       //Filter for file extension
-                    .map(replaceFileEnding)                                 //Import must be done with .js extension for node-ts
+                    .filter(file => file.endsWith(extension))           //Filter for file extension
+                    .map(replaceFileEnding)                             //Import must be done with .js extension for node-ts
                     .map(file => import(`../${folder}/${file}`))
             ));
 }

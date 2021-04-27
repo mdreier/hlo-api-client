@@ -15,6 +15,9 @@ jasmine.env.addReporter(new JasmineConsoleReporter({
 
 const describe = jasmine.env.describe;
 const it = jasmine.env.it;
+const afterAll = jasmine.env.afterAll;
+const afterEach = jasmine.env.afterEach;
+const beforeAll = jasmine.env.beforeAll;
+const beforeEach = jasmine.env.beforeEach;
 
-export default jasmine;
-export { describe, it }
+export { jasmine as default, describe, it, afterAll, afterEach, beforeAll, beforeEach }
