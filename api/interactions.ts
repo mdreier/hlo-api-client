@@ -50,7 +50,7 @@ interface AcquireAccessTokenRequest extends HLOApiRequest {
      * Name that uniquely identifies the tool to the API (50 characters maximum); Must remain constant for 
      * the life of the tool (e.g. does not include version numbers or other details that will change)
      */
-    toolName?: string;
+    toolName: string;
 
     /**
      * Specifies a brief lifespan for the issued access token (in seconds); Values longer than a short 

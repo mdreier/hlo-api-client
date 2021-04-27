@@ -50,11 +50,12 @@ class HeroLabOnlineApi {
         const content = JSON.parse(String(opts.body));
         switch (this._getOperation(url)) {
             case "acquire-access-token":
+                let toolNameProvided = content.toolName !== undefined;
                 let refreshTokenValid = content.refreshToken === Tokens.valid.user;
                 return this._respond({
                     callerId: content.callerId ? content.callerId : undefined,
                     result: refreshTokenValid ? 0 : ResultCode.BadApiToken,
-                    severity: refreshTokenValid ? Severity.Success : Severity.Error,
+                    severity: (refreshTokenValid && toolNameProvided) ? Severity.Success : Severity.Error,
                     accessToken: refreshTokenValid ? Tokens.valid.access : undefined
                 });
             case "verify-access-token":
