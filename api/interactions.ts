@@ -1,3 +1,5 @@
+import { ExportFormat } from './export.js'
+
 /**
  * Hero Lab Online API Request.
  */
@@ -70,16 +72,44 @@ interface AcquireAccessTokenResponse extends HLOApiResponse {
     accessToken: string;
 }
 
+/**
+ * Request for reading the data of a single character
+ */
 interface GetCharacterRequest extends HLOApiRequest {
+    /**
+     * Either a character token or a cast member token to retrieve the export for.
+     */
     elementToken: string;
+    /**
+     * Identifies the specific actor for which the export should be retrieved; If omitted or null, 
+     * the export retrieves information for all actors within the character portfolio.
+     */
     actor?: string;
+
+    /**
+     * Baseline version that a differential export should report changes since; If omitted or zero, 
+     * the full export is retrieved for the character.
+     */
     baseline?: number;
 }
 
+/**
+ * Response when reading a single character.
+ */
 interface GetCharacterResponse extends HLOApiResponse {
+    /**
+     * Minimum interval that the caller must wait until making another retrieval request to the API (in milliseconds).
+     */
     wait: number;
+    /**
+     * Indicates the status of the requested character and the nature of the retrieved export data (if any). See
+     * CharacterChangeStatus constants.
+     */
     status: number;
-    export?: string;
+    /**
+     * Export data for the character(or null/omittedif none is returned).
+     */
+    export?: ExportFormat | null;
 }
 
 export { HLOApiRequest, HLOApiResponse, AcquireAccessTokenRequest, AcquireAccessTokenResponse, GetCharacterRequest, GetCharacterResponse };
