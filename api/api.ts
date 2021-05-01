@@ -1,6 +1,6 @@
 import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse } from './interactions';
 import fetch from 'node-fetch';
-import { Severity } from './constants.js';
+import { ResultCode, Severity } from './constants.js';
 
 const API_BASE_PATH = 'https://api.herolab.online/v1';
 const STANDARD_HEADERS = {
@@ -19,7 +19,12 @@ function validateResponse(response: Response) {
     if (response.ok) {
         return response;
     } else {
-        throw new Error("Invalid API call");
+        throw new HLOApiError({
+            callerId: 0,
+            error: "Invalid API call",
+            severity: Severity.Error,
+            result: 0
+        });
     }
 }
 
@@ -115,4 +120,5 @@ class HLOApiError extends Error {
 }
 
 export default HLOApi;
+export { HLOApiError };
 export * from './constants.js'
