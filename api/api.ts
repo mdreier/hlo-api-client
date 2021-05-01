@@ -1,5 +1,6 @@
 import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse } from './interactions';
 import fetch from 'node-fetch';
+import { Severity } from './constants.js';
 
 const API_BASE_PATH = 'https://api.herolab.online/v1';
 const STANDARD_HEADERS = {
@@ -20,6 +21,17 @@ function validateResponse(response: Response) {
     } else {
         throw new Error("Invalid API call");
     }
+}
+
+async function sendRequest(fetchInstance: HLOApi["_fetch"], path: string, request: HLOApiRequest): Promise<HLOApiResponse> {
+    let endpoint = API_BASE_PATH + path;
+        console.debug("Sending request to " + endpoint);
+
+        return fetchInstance(endpoint, { method: 'POST', body: JSON.stringify(request), headers: STANDARD_HEADERS })
+            .then(validateResponse)
+            .then(printResponse)
+            .then(response => response.json())
+            .then(body => body as HLOApiResponse);
 }
 
 class HLOApi {
@@ -50,14 +62,7 @@ class HLOApi {
      * @returns Response data
      */
     private async _sendRequest(path: string, request: HLOApiRequest): Promise<HLOApiResponse> {
-        let endpoint = API_BASE_PATH + path;
-        console.debug("Sending request to " + endpoint);
-
-        return this._fetch(endpoint, { method: 'POST', body: JSON.stringify(request), headers: STANDARD_HEADERS })
-            .then(validateResponse)
-            .then(printResponse)
-            .then(response => response.json())
-            .then(body => body as HLOApiResponse);
+        return sendRequest(this._fetch, path, request);
     }
 
     /**
@@ -69,6 +74,36 @@ class HLOApi {
         return this._sendRequest("/access/acquire-access-token", request) as Promise<AcquireAccessTokenResponse>;
     }
 
+    /**
+     * Helper function to get an access token before creating an API instance.
+     * @param userToken User token
+     * @param fetchInstance Fetch implementation to be used for the request.
+     */
+    static async getAccessToken(userToken: string, toolName: string, fetchInstance?: HLOApi["_fetch"]): Promise<string> {
+        if (!fetchInstance) {
+            fetchInstance = fetch as unknown as HLOApi["_fetch"];
+        }
+        let response = await sendRequest(fetchInstance, "/access/acquire-access-token", { refreshToken: userToken, toolName: toolName } as AcquireAccessTokenRequest) as AcquireAccessTokenResponse;
+        if (response.severity === Severity.Success) {
+            return response.accessToken;
+        } else {
+            throw new HLOApiError(response);
+        }
+    }
+}
+
+/**
+ * Error thrown by the HeroLabl Online API for failed requests.
+ */
+class HLOApiError extends Error {
+    public readonly severity: number;
+    public readonly result: number;
+
+    constructor(response: HLOApiResponse) {
+        super(response.error);
+        this.severity = response.severity;
+        this.result = response.result;
+    }
 }
 
 export default HLOApi;
