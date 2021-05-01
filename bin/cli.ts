@@ -1,12 +1,13 @@
 import inquirer from 'inquirer';
-import HLOApi from '../api/api.js';
+import HLOApi, { ResultCode, Severity } from '../api/api.js';
 
 /**
  * Actions available in the CLI.
  */
 const Actions = {
     /** Exit the CLI */
-    EXIT: 'Exit'
+    EXIT: 'Exit',
+    VERIFY: 'Verify Acccess Token'
 }
 
 export default class HLOCli {
@@ -34,14 +35,26 @@ export default class HLOCli {
                 message: 'Action',
                 type: 'list',
                 choices: [
-                    Actions.EXIT
+                    Actions.EXIT,
+                    Actions.VERIFY
                 ]
             }]);
 
             switch (response.action) {
                 case Actions.EXIT:
                     process.exit(0);
+                case Actions.VERIFY:
+                    await this.validate();
             }
+        }
+    }
+
+    async validate() {
+        let response = await this.api.verifyAccessToken({});
+        if (response.severity === Severity.Success) {
+            process.stdout.write("Access token is valid\n");
+        } else {
+            process.stdout.write("Access token is not valid\n");
         }
     }
 };

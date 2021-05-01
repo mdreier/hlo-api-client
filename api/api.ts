@@ -52,6 +52,7 @@ function validateResponse(response: Response) {
 async function sendRequest(fetchInstance: HLOApi["_fetch"], path: string, request: HLOApiRequest): Promise<HLOApiResponse> {
     let endpoint = API_BASE_PATH + path;
         console.debug("Sending request to " + endpoint);
+        console.debug(request);
 
         return fetchInstance(endpoint, { method: 'POST', body: JSON.stringify(request), headers: STANDARD_HEADERS })
             .then(validateResponse)
@@ -126,6 +127,15 @@ class HLOApi {
         } else {
             throw new HLOApiError(response);
         }
+    }
+
+    /**
+     * Verify that the access token is still valid.
+     * @param request Request data.
+     * @returns Response data.
+     */
+    async verifyAccessToken(request: HLOApiRequest): Promise<HLOApiResponse> {
+        return this._sendRequest('/access/verify-access-token', request);
     }
 }
 

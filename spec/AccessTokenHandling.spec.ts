@@ -29,4 +29,18 @@ describe('Access Tokens', () => {
             expect(error.severity).toBe(Severity.Error);
         };
     });
+
+    it('Valid token should be verified', async () => {
+        const api = new HLOApi(Tokens.valid.access, new ApiMock().mock());;
+        let response = await api.verifyAccessToken({});
+        expect(response.severity).toBe(Severity.Success);
+        expect(response.result).toBe(0);
+    });
+
+    it('Invalid token should be verified', async () => {
+        const api = new HLOApi(Tokens.invalid.access, new ApiMock().mock());;
+        let response = await api.verifyAccessToken({});
+        expect(response.severity).toBe(Severity.Error);
+        expect(response.result).toBe(ResultCode.BadApiToken);
+    });
 });

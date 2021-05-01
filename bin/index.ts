@@ -32,7 +32,7 @@ const options = yargs(process.argv)
 
 if (!options.accessToken) {
     try {
-        options.accessToken = fs.readFileSync(getAccessFilePath(), {encoding: 'utf-8'});
+        options.accessToken = fs.readFileSync(getAccessFilePath(), {encoding: 'utf-8'}).trim();
     } catch {
         //Error occurs if file does not exist
     }
@@ -64,7 +64,7 @@ inquirer.prompt([
     const cli = new HLOCli(accessToken);
     cli.mainLoop();
 })
-.catch(e => process.stderr.write(`${e}`));
+.catch(e => process.stderr.write(`${e}\n`));
 
 /**
  * Determine the access token. Calls the HeroLab Online API if required.
@@ -83,7 +83,7 @@ async function getAccessToken(options: Options): Promise<string> {
 
     //If no access token can be determined, fail
     if (!accessToken) {
-        throw Error("User token or access token required. Pass as command-line argument or store in <user home>/.hlo-api/access_token");
+        throw Error("User token or access token required. Pass as command-line argument or store in <user home>/.hlo-api/access_token\n");
     }
 
     //Save access token if requested
