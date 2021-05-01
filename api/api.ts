@@ -44,11 +44,18 @@ class HLOApi {
     private _fetch: (input?: string | Request , init?: RequestInit) => Promise<Response> = fetch as unknown as HLOApi["_fetch"];
 
     /**
+     * Access token for all requests.
+     */
+    private _accessToken: string;
+
+    /**
      * Create a new API instance.
      * 
+     * @param accessToken Access token for the HeroLab Online API.
      * @param fetchInstance Fetch implementation to be used by this API instance.
      */
-    constructor(fetchInstance?: HLOApi["_fetch"]) {
+    constructor(accessToken: string, fetchInstance?: HLOApi["_fetch"]) {
+        this._accessToken = accessToken;
         if (fetchInstance) {
             this._fetch = fetchInstance;
         }
@@ -62,6 +69,7 @@ class HLOApi {
      * @returns Response data
      */
     private async _sendRequest(path: string, request: HLOApiRequest): Promise<HLOApiResponse> {
+        request.accessToken = this._accessToken;
         return sendRequest(this._fetch, path, request);
     }
 
