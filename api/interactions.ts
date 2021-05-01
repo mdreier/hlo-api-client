@@ -1,5 +1,5 @@
 /**
- * HeroLab Online Request.
+ * Hero Lab Online API Request.
  */
 interface HLOApiRequest {
     /**
@@ -15,7 +15,7 @@ interface HLOApiRequest {
 }
 
 /**
- * HeroLab Online Response.
+ * Hero Lab Online API Response.
  */
  interface HLOApiResponse {
     /**

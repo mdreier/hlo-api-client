@@ -2,12 +2,20 @@ import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, H
 import fetch from 'node-fetch';
 import { ResultCode, Severity } from './constants.js';
 
+/** Base URL for the Hero Lab Online API */
 const API_BASE_PATH = 'https://api.herolab.online/v1';
+
+/** Headers sent with each request */
 const STANDARD_HEADERS = {
     Accept: 'application/json',
     "Content-Type": 'application/json'
 }
 
+/**
+ * For debugging: Print response to the console 
+ * @param response Response from the API.
+ * @returns Unchanged response for method chaining.
+ */
 async function printResponse(response: Response): Promise<Response> {
     let text = await response.text();
     console.debug(text);
@@ -15,6 +23,12 @@ async function printResponse(response: Response): Promise<Response> {
     return response;
 }
 
+/**
+ * Check that the response is successful. Validates the HTTP return code.
+ * @param response  Reponse object.
+ * @returns Unchanged response for method chaining.
+ * @throws Throws HLOApiError if the response is not OK.
+ */
 function validateResponse(response: Response) {
     if (response.ok) {
         return response;
@@ -28,6 +42,13 @@ function validateResponse(response: Response) {
     }
 }
 
+/**
+ * Send a request to the API.
+ * @param fetchInstance  The fetch method to use for the request.
+ * @param path Path in the API to send the request to.
+ * @param request Request data.
+ * @returns Response data.
+ */
 async function sendRequest(fetchInstance: HLOApi["_fetch"], path: string, request: HLOApiRequest): Promise<HLOApiResponse> {
     let endpoint = API_BASE_PATH + path;
         console.debug("Sending request to " + endpoint);
@@ -39,6 +60,9 @@ async function sendRequest(fetchInstance: HLOApi["_fetch"], path: string, reques
             .then(body => body as HLOApiResponse);
 }
 
+/**
+ * Client class for the Hero Lab Online API.
+ */
 class HLOApi {
 
     /**
@@ -56,7 +80,7 @@ class HLOApi {
     /**
      * Create a new API instance.
      * 
-     * @param accessToken Access token for the HeroLab Online API.
+     * @param accessToken Access token for the Hero Lab Online API.
      * @param fetchInstance Fetch implementation to be used by this API instance.
      */
     constructor(accessToken: string, fetchInstance?: HLOApi["_fetch"]) {
@@ -106,12 +130,22 @@ class HLOApi {
 }
 
 /**
- * Error thrown by the HeroLabl Online API for failed requests.
+ * Error thrown by the Hero Lab Online API for failed requests.
  */
 class HLOApiError extends Error {
+    /**
+     * Error severity. See constants in type Severity for values.
+     */
     public readonly severity: number;
+    /**
+     * Error code. See constants in type ResultCode for values.
+     */
     public readonly result: number;
 
+    /**
+     * Create a new error.
+     * @param response Response from the Hero Lab Online API.
+     */
     constructor(response: HLOApiResponse) {
         super(response.error);
         this.severity = response.severity;

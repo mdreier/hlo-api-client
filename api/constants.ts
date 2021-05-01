@@ -1,5 +1,5 @@
 /**
- * Result codes from Appendix 1 of the HeroLab Online API specification.
+ * Result codes from Appendix 1 of the Hero Lab Online API specification.
  */
  const ResultCode = {
     /**
@@ -106,7 +106,7 @@
 } as const;
 
 /**
- * Severities from Appendix 1 of the HeroLab Online API specification.
+ * Severities from Appendix 1 of the Hero Lab Online API specification.
  */
 const Severity = {
     /**
