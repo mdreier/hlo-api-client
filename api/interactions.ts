@@ -70,4 +70,16 @@ interface AcquireAccessTokenResponse extends HLOApiResponse {
     accessToken: string;
 }
 
-export { HLOApiRequest, HLOApiResponse, AcquireAccessTokenRequest, AcquireAccessTokenResponse };
+interface GetCharacterRequest extends HLOApiRequest {
+    elementToken: string;
+    actor?: string;
+    baseline?: number;
+}
+
+interface GetCharacterResponse extends HLOApiResponse {
+    wait: number;
+    status: number;
+    export?: string;
+}
+
+export { HLOApiRequest, HLOApiResponse, AcquireAccessTokenRequest, AcquireAccessTokenResponse, GetCharacterRequest, GetCharacterResponse };

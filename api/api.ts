@@ -1,4 +1,4 @@
-import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse } from './interactions';
+import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse, GetCharacterRequest, GetCharacterResponse } from './interactions';
 import fetch from 'node-fetch';
 import { ResultCode, Severity } from './constants.js';
 
@@ -106,10 +106,15 @@ class HLOApi {
     /**
      * Acquire an access token.
      * @param request Request data.
+     * @param setAccessToken Set the new access token for this API instance if the request was successful.
      * @returns Response data.
      */
-    async acquireAccessToken(request: AcquireAccessTokenRequest): Promise<AcquireAccessTokenResponse> {
-        return this._sendRequest("/access/acquire-access-token", request) as Promise<AcquireAccessTokenResponse>;
+    async acquireAccessToken(request: AcquireAccessTokenRequest, setAccessToken: boolean = true): Promise<AcquireAccessTokenResponse> {
+        const response = await this._sendRequest("/access/acquire-access-token", request) as AcquireAccessTokenResponse;
+        if (setAccessToken && response.severity === Severity.Success && response.accessToken) {
+            this._accessToken = response.accessToken;
+        }
+        return response;
     }
 
     /**
@@ -136,6 +141,10 @@ class HLOApi {
      */
     async verifyAccessToken(request: HLOApiRequest): Promise<HLOApiResponse> {
         return this._sendRequest('/access/verify-access-token', request);
+    }
+
+    async getCharacter(request: GetCharacterRequest): Promise<GetCharacterResponse> {
+        return this._sendRequest('/character/get', request) as Promise<GetCharacterResponse>
     }
 }
 

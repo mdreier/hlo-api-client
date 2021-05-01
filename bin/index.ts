@@ -1,17 +1,14 @@
 import yargs from 'yargs'
 import HLOApi from '../api/api.js';
 import fs from 'fs-extra';
-import os from 'os';
 import inquirer from 'inquirer';
-import HLOCli from './cli.js';
+import HLOCli, { TOOLNAME, getAccessFilePath, getUserFilePath } from './cli.js';
 
 type Options = {
     userToken: string,
     accessToken: string,
     saveAccessToken: boolean
 }
-
-const TOOLNAME = "HeroLab Online CLI";
 
 const options = yargs(process.argv)
     .usage("Usage: [--user-token <user token>] [--access-token <access token>]")
@@ -38,6 +35,14 @@ if (!options.accessToken) {
     }
 }
 
+if (!options.userToken) {
+    try {
+        options.userToken = fs.readFileSync(getUserFilePath(), {encoding: 'utf-8'}).trim();
+    } catch {
+        //Error occurs if file does not exist
+    }
+}
+
 inquirer.prompt([
     {
         name: 'accessToken',
@@ -59,9 +64,9 @@ inquirer.prompt([
     }
 ])
 .then(answers => Object.assign(options, answers))
-.then(getAccessToken)
-.then(accessToken => {
-    const cli = new HLOCli(accessToken);
+.then(getTokens)
+.then(({userToken, accessToken}) => {
+    const cli = new HLOCli(userToken, accessToken);
     cli.mainLoop();
 })
 .catch(e => process.stderr.write(`${e}\n`));
@@ -72,7 +77,7 @@ inquirer.prompt([
  * @param options Options 
  * @returns The access token, or undefined if the access token could not be read.
  */
-async function getAccessToken(options: Options): Promise<string> {
+async function getTokens(options: Options): Promise<any> {
     //If access token is already provided, save the access token
     let accessToken = options.accessToken;
 
@@ -91,13 +96,5 @@ async function getAccessToken(options: Options): Promise<string> {
         fs.writeFile(getAccessFilePath(), accessToken, {encoding: 'utf-8'});
     }
 
-    return accessToken;
-}
-
-/**
- * Get the path to the file which stores the access token.
- * @returns File path.
- */
-function getAccessFilePath(): string {
-    return os.homedir() + "/.hlo-api/access_token";
+    return {userToken: options.userToken, accessToken: accessToken};
 }

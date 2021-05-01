@@ -131,4 +131,26 @@ const Severity = {
     Failure: 200
 } as const;
 
-export { ResultCode, Severity };
+/**
+ * Character Change Status from Appendix 2 of the Hero Lab Online API specification.
+ */
+const CharacterChangeStatus = {
+    /**
+     * Character is not valid or is inaccessible, which can occur for a variety of reasons; No export data is returned.
+     */
+    Missing: -1,
+    /**
+     * No changes have occurred with the character since the given baseline version; No export data is returned.
+     */
+    Unchanged: 0,
+    /**
+     * The character has likely changed relative to the baseline version, returning a differential export (which may itself be empty).
+     */
+    Delta: 1,
+    /**
+     * Either a baseline version of zero was request or the character has changed relative to the baseline version, with a full export being returned.
+     */
+    Complete: 2
+} as const;
+
+export { ResultCode, Severity, CharacterChangeStatus };
