@@ -1,7 +1,22 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import inquirer from 'inquirer';
 import fs from 'fs';
 import os from 'os';
-import HLOApi, { CharacterChangeStatus, ResultCode, Severity } from '../api.js';
+import HLOApi from '../api.js';
+import { CharacterChangeStatus, Severity } from '../constants.js'
+
+type MainLoopResponse = {
+    action: string
+}
+
+type ValidateResponse = {
+    refreshAccessToken: boolean,
+    storeAccessToken: boolean
+}
+
+type GetCharacterInput = {
+    elementToken: string
+}
 
 /**
  * Actions available in the CLI.
@@ -29,6 +44,7 @@ export default class HLOCli {
 
     /**
      * Create a new CLI instance.
+     *
      * @param accessToken Access token for the HeroLabl Online API.
      */
     constructor(userToken: string, accessToken: string) {
@@ -39,9 +55,10 @@ export default class HLOCli {
     /**
      * Start the main loop for the CLI.
      */
-    async mainLoop() {
+    async mainLoop(): Promise<void> {
+        // eslint-disable-next-line no-constant-condition
         while(true) {
-            let response = await inquirer.prompt([{
+            const response = await inquirer.prompt([{
                 name: 'action',
                 message: 'Action',
                 type: 'list',
@@ -50,7 +67,7 @@ export default class HLOCli {
                     Actions.VERIFY,
                     Actions.EXIT
                 ]
-            }]);
+            }]) as MainLoopResponse;
 
             switch (response.action) {
                 case Actions.EXIT:
@@ -65,14 +82,14 @@ export default class HLOCli {
         }
     }
 
-    async validate() {
-        let response = await this.api.verifyAccessToken({});
+    async validate(): Promise<void> {
+        const response = await this.api.verifyAccessToken({});
         if (response.severity === Severity.Success) {
             process.stdout.write("Access token is valid\n");
         } else {
             process.stdout.write("Access token is not valid\n");
         }
-        let input = await inquirer.prompt([
+        const input = await inquirer.prompt([
             {
                 name: 'refreshAccessToken',
                 message: 'Refresh access token?',
@@ -82,32 +99,32 @@ export default class HLOCli {
                 name: 'storeAccessToken',
                 message: 'Store new access token?',
                 type: 'confirm',
-                when: answers => answers.refreshAccessToken
+                when: (answers: ValidateResponse) => answers.refreshAccessToken
             }
         ]);
         if (input.refreshAccessToken) {
-            let response = await this.api.acquireAccessToken({refreshToken: this.userToken, toolName: TOOLNAME});
+            const tokenResponse = await this.api.acquireAccessToken({refreshToken: this.userToken, toolName: TOOLNAME});
             if (input.storeAccessToken) {
-                fs.writeFileSync(getAccessFilePath(), response.accessToken, {encoding: 'utf-8'});
+                fs.writeFileSync(getAccessFilePath(), tokenResponse.accessToken, {encoding: 'utf-8'});
             }
         }
     }
 
-    async getCharacter() {
-        let input = await inquirer.prompt([
+    async getCharacter(): Promise<void> {
+        const input = await inquirer.prompt([
             {
                 name: 'elementToken',
                 message: 'Element Token'
             }
-        ]);
+        ]) as GetCharacterInput;
 
-        let response = await this.api.getCharacter({elementToken: input.elementToken});
+        const response = await this.api.getCharacter({elementToken: input.elementToken});
         if (response.status === CharacterChangeStatus.Missing) {
             process.stdout.write("Character not found");
         } else if (response.status === CharacterChangeStatus.Unchanged) {
             process.stdout.write("Character unchanged");
         } else if (response.export) {
-            process.stdout.write(`${response.export}`);
+            process.stdout.write(`${JSON.stringify(response.export)}`);
         } else {
             process.stdout.write("No character data received");
         }
@@ -116,17 +133,19 @@ export default class HLOCli {
 
 /**
  * Get the path to the file which stores the access token.
+ *
  * @returns File path.
  */
- function getAccessFilePath(): string {
+ const getAccessFilePath = (): string => {
     return os.homedir() + "/.hlo-api/access_token";
 }
 
 /**
  * Get the path to the file which stores the user token.
+ *
  * @returns File path.
  */
- function getUserFilePath(): string {
+ const getUserFilePath = (): string => {
     return os.homedir() + "/.hlo-api/user_token";
 }
 

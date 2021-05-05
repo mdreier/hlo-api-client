@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+
 /**
  * Result codes from Appendix 1 of the Hero Lab Online API specification.
  */
@@ -16,7 +18,7 @@
     Precluded: 7022,
     /**
      * The provided token is invalid in some way, typically having expired or been revoked.
-     * 
+     *
      * NOTE! If a refresh token is invalid, a new accesstoken must be acquired through the product.
      * NOTE! If an access token is invalid, a fresh access token must be acquired via the endpointprovided forthis purpose. Access tokens havea nominallifespan and will expire regularly.
      */
@@ -64,7 +66,7 @@
     /**
      * The caller is hitting the API endpoints faster than allowed and has been denied access.NOTE! When this occurs, the previous
      * wait time is restarted anew, so slow downsending requests.
-     * 
+     *
      * NOTE! If a caller persistently requires throttling on a protracted
      * basis, additional lockout periods will be applied that become progressively longer.
      */
@@ -75,19 +77,19 @@
     CallerThrottledOverlap: 7801,
     /**
      * Persistent need for throttling has resulted in a prolonged lockout at the next tier.
-     * 
+     *
      * NOTE! Each tier imposes a progressively longer lockout period. Wait for the lockout to expire before utilizing the API further.
      */
     CallerLockoutTier: 7805,
     /**
      * Multiple callers are polling the same token(s) concurrently, which is not allowed.
-     * 
+     *
      * NOTE! This caller has been locked out for a little while and must wait until the lockout elapses.
      */
     OverlappingClientLockout: 7810,
     /**
      * Connection from client tool was denied due to reaching the maximum limit on connections.
-     * 
+     *
      * NOTE! Contact support for assistance in resolving the problem.
      */
     ConnectionLimitExceeded: 7890,

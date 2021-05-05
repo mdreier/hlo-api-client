@@ -10,7 +10,7 @@ interface HLOApiRequest {
     callerId?: number;
     /**
      * Access token acquired from the user token.
-     * 
+     *
      * Required for all requests except the initial request to acquire the access token.
      */
     accessToken?: string;
@@ -33,7 +33,7 @@ interface HLOApiRequest {
      */
     severity: number;
     /**
-     * If an error occurred, this will be a plain text explanation of what went wrong that will hopefully be 
+     * If an error occurred, this will be a plain text explanation of what went wrong that will hopefully be
      * helpful incorrecting the problem; Omitted if the request was successful
      */
     error?: string;
@@ -49,14 +49,14 @@ interface AcquireAccessTokenRequest extends HLOApiRequest {
     refreshToken: string;
 
     /**
-     * Name that uniquely identifies the tool to the API (50 characters maximum); Must remain constant for 
+     * Name that uniquely identifies the tool to the API (50 characters maximum); Must remain constant for
      * the life of the tool (e.g. does not include version numbers or other details that will change)
      */
     toolName: string;
 
     /**
-     * Specifies a brief lifespan for the issued access token (in seconds); Values longer than a short 
-     * period are rejected, making this only useful for testing purposes; Zero yields the default 
+     * Specifies a brief lifespan for the issued access token (in seconds); Values longer than a short
+     * period are rejected, making this only useful for testing purposes; Zero yields the default
      * lifespan (as does omitting the property)
      */
     lifespan?: number;
@@ -81,13 +81,13 @@ interface GetCharacterRequest extends HLOApiRequest {
      */
     elementToken: string;
     /**
-     * Identifies the specific actor for which the export should be retrieved; If omitted or null, 
+     * Identifies the specific actor for which the export should be retrieved; If omitted or null,
      * the export retrieves information for all actors within the character portfolio.
      */
     actor?: string;
 
     /**
-     * Baseline version that a differential export should report changes since; If omitted or zero, 
+     * Baseline version that a differential export should report changes since; If omitted or zero,
      * the full export is retrieved for the character.
      */
     baseline?: number;
