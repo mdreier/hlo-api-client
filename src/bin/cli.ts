@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 import os from 'os';
-import HLOApi, { CharacterChangeStatus, ResultCode, Severity } from '../api/api.js';
+import HLOApi, { CharacterChangeStatus, ResultCode, Severity } from '../api.js';
 
 /**
  * Actions available in the CLI.

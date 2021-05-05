@@ -1,5 +1,5 @@
 import yargs from 'yargs'
-import HLOApi from '../api/api.js';
+import HLOApi from '../api.js';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import HLOCli, { TOOLNAME, getAccessFilePath, getUserFilePath } from './cli.js';
