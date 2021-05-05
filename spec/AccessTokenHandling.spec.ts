@@ -1,5 +1,5 @@
-import HLOApi, { HLOApiError, ResultCode, Severity } from '../api/api.js';
-import { AcquireAccessTokenRequest } from '../api/interactions.js';
+import HLOApi, { HLOApiError, ResultCode, Severity } from '../src/api.js';
+import { AcquireAccessTokenRequest } from '../src/interactions.js';
 import { describe, it } from '../test/jasmine.js'
 import ApiMock, { Tokens } from './helpers/hloApiMock.js'
 

@@ -1,5 +1,5 @@
 import 'url';
-import { ResultCode, Severity } from '../../api/constants.js';
+import { ResultCode, Severity } from '../../src/constants.js';
 import fetchMock from 'fetch-mock';
 
 const Tokens = {
