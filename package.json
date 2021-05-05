@@ -2,15 +2,21 @@
   "name": "hlo-api",
   "version": "1.0.0",
   "description": "Access to the HeroLab Online API",
-  "main": "dist/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "type": "module",
   "scripts": {
     "test": "node --loader ts-node/esm test/run.ts",
-    "cli": "node --loader ts-node/esm bin/index.ts"
+    "cli": "node --loader ts-node/esm bin/index.ts",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "prepublish": "npm run build"
   },
   "bin": {
     "hlo-cli": "./bin/index.js"
   },
+  "files": [
+    "lib/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdreier/hlo-api.git"
