@@ -3,6 +3,8 @@
 This package is a JavaScript/TypeScript client for the Hero Lab Online API. It contains a fully typed interface for all methods exposed
 by the API and is ready for use with Node.js.
 
+The API client supports all read methods for characters and campaigns. It does currently not support subscriptions, this is planned for a future version.
+
 This software is not affiliated with Lone Wolf Development in any way. "Hero Lab" and "Hero Lab Online" are trademarked by LoneWolf Development
 
 ## API Documentation
@@ -35,7 +37,7 @@ user token and **their** element token(s).
 
 :warning: Generally, the API client does not wrap too much intelligence around the raw API methods. Therefor it is recommended to read through the
 [API documentation](#api-documentation) before using the client to understand how the API works. This helps to understand how to use the methods and
-also why certain errors may occur.
+also why certain errors may occur. This is especially true regarding the wait time.
 
 ### Initialize the API
 
