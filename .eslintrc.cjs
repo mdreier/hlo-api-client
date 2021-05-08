@@ -11,8 +11,9 @@ module.exports = {
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "project": "tsconfig.json",
-        "sourceType": "module"
+        "project": "tsconfig.eslint.json",
+        "sourceType": "module",
+        "extraFileExtensions": [".cjs"]
     },
     "plugins": [
         "eslint-plugin-jsdoc",
@@ -54,7 +55,13 @@ module.exports = {
         ],
         "@typescript-eslint/consistent-type-assertions": "error",
         "@typescript-eslint/dot-notation": "error",
-        "@typescript-eslint/naming-convention": "error",
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "variable",
+                "format": ["camelCase", "UPPER_CASE", "PascalCase"]
+            }
+        ],
         "@typescript-eslint/no-empty-function": "error",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-explicit-any": "off",

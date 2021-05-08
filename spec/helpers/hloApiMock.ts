@@ -15,54 +15,56 @@ const Tokens = {
 
 class HeroLabOnlineApi {
 
-    mock() {
-        let sandbox = fetchMock.sandbox();
+    mock(): fetchMock.FetchMockSandbox {
+        const sandbox = fetchMock.sandbox();
         sandbox.mock(/https:\/\/api.herolab.online\/v1\/access\/.*/, this.handleAccess.bind(this));
         sandbox.mock(/https:\/\/api.herolab.online\/v1\/character\/.*/, this.handleCharacter.bind(this));
-        sandbox.mock(/https:\/\/api.herolab.online\/v1\/campaign\/.*/, this.handleCampaign.bind(this));            
+        sandbox.mock(/https:\/\/api.herolab.online\/v1\/campaign\/.*/, this.handleCampaign.bind(this));
         return sandbox;
     }
 
     /**
      * Get the operation called in a request. The operation is the
      * last segment of the request path.
-     * 
+     *
      * For example, in the request /characters/get, the operation would
-     * be get.
+     * be "get".
+     *
      * @param request Request object.
      * @returns Name of the operation.
      */
-    _getOperation(path: string): string {
-        let url = new URL(path);
-        let pathSegments = url.pathname.split('/');
+    private getOperation(path: string): string {
+        const url = new URL(path);
+        const pathSegments = url.pathname.split('/');
         return pathSegments[pathSegments.length - 1];
     }
 
-    _respond(body: object) {
+    private respond(body: Record<string, unknown>): Record<string, unknown> {
         return {
             body: JSON.stringify(body),
             status: 200,
-            headers: {"Content-Type": "application/json"}
+            headers: { "Content-Type": "application/json" }
         };
     }
 
-    _respondBadRequest() {
+    private respondBadRequest(): Record<string, unknown> {
         return {
             body: '<!DOCTYPE html><html lang="en" manifest="/manifest.appcache"><head><body></body>',
             status: 400,
-            headers: {"Content-Type": "text/html"}
+            headers: { "Content-Type": "text/html" }
         };
     }
 
-    handleAccess(url: string, opts: fetchMock.MockOptionsMethodPost) {
-        const content = JSON.parse(String(opts.body));
-        switch (this._getOperation(url)) {
+    handleAccess(url: string, opts: fetchMock.MockOptionsMethodPost): Record<string, unknown> {
+        const content = JSON.parse(String(opts.body)) as Record<string, unknown>;
+        const accessTokenValid = content.accessToken === Tokens.valid.access;
+        switch (this.getOperation(url)) {
             case "acquire-access-token":
                 if (!content.toolName) {
-                    return this._respondBadRequest();
+                    return this.respondBadRequest();
                 } else {
-                    let refreshTokenValid = content.refreshToken === Tokens.valid.user;
-                    return this._respond({
+                    const refreshTokenValid = content.refreshToken === Tokens.valid.user;
+                    return this.respond({
                         callerId: content.callerId ? content.callerId : undefined,
                         result: refreshTokenValid ? 0 : ResultCode.BadApiToken,
                         severity: refreshTokenValid ? Severity.Success : Severity.Error,
@@ -70,8 +72,7 @@ class HeroLabOnlineApi {
                     });
                 }
             case "verify-access-token":
-                let accessTokenValid = content.accessToken === Tokens.valid.access;
-                return this._respond({
+                return this.respond({
                     callerId: content.callerId ? content.callerId : undefined,
                     result: accessTokenValid ? 0 : ResultCode.BadApiToken,
                     severity: accessTokenValid ? Severity.Success : Severity.Error,
@@ -80,15 +81,15 @@ class HeroLabOnlineApi {
             case "identify-notification-server":
             case "attach-game-server":
             case "unsubscribe-all":
-                //Notifications and server status not supported
-                return this._respond({
+                // Notifications and server status not supported
+                return this.respond({
                     callerId: content.callerId ? content.callerId : undefined,
                     result: ResultCode.NotEnabled,
                     severity: Severity.Failure
                 });
             default:
-                //Unknown request
-                return this._respond({
+                // Unknown request
+                return this.respond({
                     callerId: content.callerId ? content.callerId : undefined,
                     result: ResultCode.UnspecifiedError,
                     severity: Severity.Error
@@ -96,23 +97,23 @@ class HeroLabOnlineApi {
         }
     }
 
-    handleCharacter(url: string, opts: fetchMock.MockOptionsMethodPost) {
-        const content = JSON.parse(String(opts.body));
-        return this._respond({
+    handleCharacter(url: string, opts: fetchMock.MockOptionsMethodPost): Record<string, unknown> {
+        const content = JSON.parse(String(opts.body)) as Record<string, unknown>;
+        return this.respond({
             callerId: content.callerId ? content.callerId : undefined,
             result: ResultCode.UnspecifiedError,
             severity: Severity.Error
         });
-}
+    }
 
-    handleCampaign(url: string, opts: fetchMock.MockOptionsMethodPost) {
-        const content = JSON.parse(String(opts.body));
-        return this._respond({
+    handleCampaign(url: string, opts: fetchMock.MockOptionsMethodPost): Record<string, unknown> {
+        const content = JSON.parse(String(opts.body)) as Record<string, unknown>;
+        return this.respond({
             callerId: content.callerId ? content.callerId : undefined,
             result: ResultCode.UnspecifiedError,
             severity: Severity.Error
         });
-}
+    }
 
 }
 
