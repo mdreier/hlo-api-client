@@ -60,7 +60,7 @@ const validateResponse = (response: Response) => {
  * @param request Request data.
  * @returns Response data.
  */
-const sendRequest = async (fetchInstance: HLOApi["fetch"], path: string, request: HLOApiRequest): Promise<HLOApiResponse> => {
+const sendRequest = async (fetchInstance: HLOApiClient["fetch"], path: string, request: HLOApiRequest): Promise<HLOApiResponse> => {
     const endpoint = API_BASE_PATH + path;
         console.debug("Sending request to " + endpoint);
         console.debug(request);
@@ -73,7 +73,7 @@ const sendRequest = async (fetchInstance: HLOApi["fetch"], path: string, request
 }
 
 /**
- * Configuration for the HeroLab Online API.
+ * Configuration for the HeroLab Online API Client.
  */
 type APIConfiguration = {
     /**
@@ -127,14 +127,14 @@ type APIConfiguration = {
 /**
  * Client class for the Hero Lab Online API.
  */
-class HLOApi {
+class HLOApiClient {
 
     /**
      * Fetch implementation called by the API.
      *
      * Defaults to the node-fetch implementation, can be overwritten by passing a function to the constructor.
      */
-    private fetch: (input?: string | Request , init?: RequestInit) => Promise<Response> = fetch as unknown as HLOApi["fetch"];
+    private fetch: (input?: string | Request , init?: RequestInit) => Promise<Response> = fetch as unknown as HLOApiClient["fetch"];
 
     /**
      * API configuration.
@@ -147,7 +147,7 @@ class HLOApi {
      * @param userToken User token for the Hero Lab Online API.
      * @param fetchInstance Fetch implementation to be used by this API instance.
      */
-    constructor(options: APIConfiguration | string, fetchInstance?: HLOApi["fetch"]) {
+    constructor(options: APIConfiguration | string, fetchInstance?: HLOApiClient["fetch"]) {
         // Initialize configuration
         if (typeof options === 'object') {
             this.configuration = {
@@ -249,7 +249,7 @@ class HLOApi {
      * @param accessToken Access token for the HeroLab Online API.
      * @returns This API instance for method chaining.
      */
-    setAccessToken(accessToken: string): HLOApi {
+    setAccessToken(accessToken: string): HLOApiClient {
         this.configuration.accessToken = accessToken;
         return this;
     }
@@ -312,4 +312,4 @@ class HLOApi {
     }
 }
 
-export { HLOApi, APIConfiguration };
+export { HLOApiClient, APIConfiguration };

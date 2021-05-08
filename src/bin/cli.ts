@@ -2,7 +2,7 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 import os from 'os';
-import { HLOApi } from '../api.js';
+import { HLOApiClient } from '../api.js';
 import { CharacterChangeStatus, Severity } from '../constants.js'
 
 type MainLoopResponse = {
@@ -35,7 +35,7 @@ export default class HLOCli {
     /**
      * API instance used by the CLI.
      */
-    private api: HLOApi;
+    private api: HLOApiClient;
 
     /**
      * Cache the user token.
@@ -49,7 +49,7 @@ export default class HLOCli {
      */
     constructor(userToken: string, accessToken: string) {
         this.userToken = userToken;
-        this.api = new HLOApi({userToken, accessToken, autoTokenHandling: true, toolName: TOOLNAME});
+        this.api = new HLOApiClient({userToken, accessToken, autoTokenHandling: true, toolName: TOOLNAME});
         if (!accessToken) {
             void this.api.acquireAccessToken();
         }

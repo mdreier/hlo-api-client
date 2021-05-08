@@ -14,7 +14,7 @@ The [official HeroLab Online API documentation](https://docs.herolab.online/HLO-
 
 ### General Considerations
 
-To use the API, you need to get a user refresh token. From the API Documentation:
+To use the API client, you need to get a user refresh token. From the API Documentation:
 
 > Connecting to the server is initiated with a **user token**.Each user token identifies the user requesting the data from the API, along with 
 > other important details the API needs. Users must provide their user token to a tool they wish to employ, and that tool then accesses the HLO

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { HLOApi } from '../src/api.js';
+import { HLOApiClient } from '../src/api.js';
 import { ResultCode, Severity } from '../src/constants.js'
 import { HLOApiError } from '../src/error.js';
 import { describe, it } from '../test/jasmine.js'
 import ApiMock, { Tokens } from './helpers/hloApiMock.js'
 
-const TOOLNAME = 'HLO API Unit Test';
+const TOOLNAME = 'HLO API Client Unit Test';
 
 const createApi = (userToken: string, automaticTokenHandling = false) => {
-    return new HLOApi({userToken, autoTokenHandling: automaticTokenHandling}, new ApiMock().mock())
+    return new HLOApiClient({userToken, autoTokenHandling: automaticTokenHandling}, new ApiMock().mock())
 }
 
 describe('Access Tokens', () => {
