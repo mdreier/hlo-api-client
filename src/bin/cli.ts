@@ -18,6 +18,10 @@ type GetCharacterInput = {
     elementToken: string
 }
 
+type GetCharacterBulkInput = {
+    elementTokens: string
+}
+
 /**
  * Actions available in the CLI.
  */
@@ -25,7 +29,8 @@ const Actions = {
     /** Exit the CLI */
     EXIT: 'Exit',
     VERIFY: 'Verify Acccess Token',
-    GET_CHARACTER: 'Get Character'
+    GET_CHARACTER: 'Get Character',
+    GET_BULK: 'Get multiple characters'
 }
 
 const TOOLNAME = "HeroLab Online CLI";
@@ -67,6 +72,7 @@ export default class HLOCli {
                 type: 'list',
                 choices: [
                     Actions.GET_CHARACTER,
+                    Actions.GET_BULK,
                     Actions.VERIFY,
                     Actions.EXIT
                 ]
@@ -80,6 +86,9 @@ export default class HLOCli {
                     break;
                 case Actions.GET_CHARACTER:
                     await this.getCharacter();
+                    break;
+                case Actions.GET_BULK:
+                    await this.getCharacterBulk();
                     break;
             }
         }
@@ -130,6 +139,28 @@ export default class HLOCli {
             process.stdout.write(`${JSON.stringify(response.export)}`);
         } else {
             process.stdout.write("No character data received");
+        }
+    }
+
+    async getCharacterBulk(): Promise<void> {
+        const input = await inquirer.prompt([
+            {
+                name: 'elementTokens',
+                message: 'Element Tokens (separated by comma)',
+            }
+        ]) as GetCharacterBulkInput;
+
+        const response = await this.api.getCharacters(input.elementTokens.split(/\s*,\s*/));
+        for (const character of response.characters) {
+            if (character.status === CharacterChangeStatus.Missing) {
+                process.stdout.write(`Character ${character.elementToken} not found`);
+            } else if (character.status === CharacterChangeStatus.Unchanged) {
+                process.stdout.write(`Character ${character.elementToken} unchanged`);
+            } else if (character.export) {
+                process.stdout.write(`${character.elementToken}: ${JSON.stringify(character.export)}`);
+            } else {
+                process.stdout.write(`No character data received for ${character.elementToken}`);
+            }
         }
     }
 };

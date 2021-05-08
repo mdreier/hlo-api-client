@@ -1,7 +1,9 @@
+/* eslint-disable no-case-declarations */
 import 'url';
-import { ResultCode, Severity } from '../../src/constants.js';
+import { CharacterChangeStatus, ResultCode, Severity } from '../../src/constants.js';
 import fetchMock from 'fetch-mock';
 import characters from './characters.js';
+import { GetCharacterIndividualRequest } from '../../src/interactions.js';
 
 const Tokens = {
     valid: {
@@ -117,6 +119,14 @@ class HeroLabOnlineApi {
                     severity: content.elementToken === Tokens.valid.singleCharacter ? Severity.Success : Severity.Error,
                     result: content.elementToken === Tokens.valid.singleCharacter ? 0 : ResultCode.BadElementToken,
                     export: content.elementToken === Tokens.valid.singleCharacter ? characters.fullExport : undefined
+                });
+            case "get-bulk":
+                const bulkRequestValid = (content.characters as GetCharacterIndividualRequest[]).filter(character => character.elementToken !== Tokens.valid.singleCharacter).length === 0;
+                return this.respond({
+                    callerId: content.callerId,
+                    severity: bulkRequestValid ? Severity.Success : Severity.Error,
+                    result: bulkRequestValid ? 0 : ResultCode.BadElementToken,
+                    characters: bulkRequestValid ? (content.characters as GetCharacterIndividualRequest[]).map(character => {return {elementToken: character.elementToken, status: CharacterChangeStatus.Complete, export: characters.fullExport}}) : undefined
                 });
             default:
                 return this.respond({

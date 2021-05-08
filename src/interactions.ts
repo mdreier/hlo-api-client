@@ -112,4 +112,79 @@ interface GetCharacterResponse extends HLOApiResponse {
     export?: ExportFormat | null;
 }
 
-export { HLOApiRequest, HLOApiResponse, AcquireAccessTokenRequest, AcquireAccessTokenResponse, GetCharacterRequest, GetCharacterResponse };
+/**
+ * Individual character in a bulk request.
+ */
+interface GetCharacterIndividualRequest {
+    /**
+     * Acharacter token,cast member token, or campaign tokenfor which to retrieve export data.
+     */
+    elementToken: string;
+    /**
+     * Unique id of a cast member for which to retrieve export data; Only applicable when a campaign token is
+     * specified as the element token and must otherwise be null or the empty string; Id must have been obtained
+     * via a separate API endpoint that retrieves cast ids for a campaign token.
+     */
+    castId?: string;
+    /**
+     * Identifies the specific actor for which the export should be retrieved; If omitted or null, the export
+     * retrieves information for all actors within the character portfolio.
+     */
+    actor?: string;
+    /**
+     * Baseline version that a differential export should report changes since; If omitted or zero, the full
+     * export is retrieved for the character.
+     */
+    baseline?: number;
+}
+
+/**
+ * Request for reading characters in bulk.
+ */
+interface GetCharacterBulkRequest extends HLOApiRequest {
+    /**
+     * Array of one or more objects with the property structure defined in GetCharacterIndividualRequest.
+     */
+    characters: GetCharacterIndividualRequest[]
+}
+
+/**
+ * Individual character in a bulk response.
+ */
+interface GetCharacterIndividualResponse {
+    /**
+     * Identical token passed in for the corresponding requested character.
+     */
+    elementToken: string;
+    /**
+     * Identical token passed in by the request.
+     */
+    castId?: string;
+    /**
+     * Indicates the status of the requested character and the nature of the reported export data; See
+     * constant CharacterChangeStatus for the values that can be returned.
+     */
+    status: number;
+    /**
+     * Export data for the character (or null/omitted if none is returned).
+     */
+    export?: ExportFormat;
+}
+
+/**
+ * Response for reading characters in bulk.
+ */
+interface GetCharacterBulkResponse extends HLOApiResponse {
+    /**
+     * Minimum interval that the caller must wait until making another retrieval request to the API (inmilliseconds).
+     */
+    wait: number;
+
+    /**
+     * Array of one or more objects with the property structure defined above.
+     */
+    characters: GetCharacterIndividualResponse[];
+}
+
+export { HLOApiRequest, HLOApiResponse, AcquireAccessTokenRequest, AcquireAccessTokenResponse, GetCharacterRequest,
+    GetCharacterResponse, GetCharacterIndividualRequest, GetCharacterBulkRequest, GetCharacterIndividualResponse, GetCharacterBulkResponse };

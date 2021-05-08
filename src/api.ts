@@ -1,4 +1,4 @@
-import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse, GetCharacterRequest, GetCharacterResponse } from './interactions';
+import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse, GetCharacterRequest, GetCharacterResponse, GetCharacterBulkRequest, GetCharacterBulkResponse } from './interactions';
 import fetch from 'node-fetch';
 import { ResultCode, Severity } from './constants.js';
 import { HLOApiError } from './error.js';
@@ -282,6 +282,21 @@ class HLOApiClient {
             }
         }
         return this.sendRequestWithTokenHandling('/character/get', request) as Promise<GetCharacterResponse>
+    }
+
+    /**
+     * Read multiple characters in bulk.
+     *
+     * @param request Array of element tokens or full request.
+     * @returns Response data with character information.
+     */
+    async getCharacters(request: GetCharacterBulkRequest | string[]): Promise<GetCharacterBulkResponse> {
+        if (Array.isArray(request)) {
+            request = {
+                characters: request.map(elementToken => { return { elementToken } })
+            }
+        }
+        return this.sendRequestWithTokenHandling('/character/get-bulk', request) as Promise<GetCharacterBulkResponse>;
     }
 
     /**
