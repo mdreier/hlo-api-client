@@ -40,7 +40,7 @@ also why certain errors may occur.
 ### Initialize the API
 
 Create a new API instance. You always have to pass a user refresh token, and you may optionally pass an access token. See the type
-[APIConfiguration](docs/modules.html#apiconfiguration) for a description of all options.
+[APIConfiguration](https://mdreier.github.io/hlo-api/modules.html#apiconfiguration) for a description of all options.
 
 ```javascript
 import {HLOApiClient} from 'hlo-api-client';
