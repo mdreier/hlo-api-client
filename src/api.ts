@@ -1,10 +1,15 @@
 import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse, GetCharacterRequest, GetCharacterResponse } from './interactions';
 import fetch from 'node-fetch';
-import { Severity } from './constants.js';
+import { ResultCode, Severity } from './constants.js';
 import { HLOApiError } from './error.js';
 
 /** Base URL for the Hero Lab Online API */
 const API_BASE_PATH = 'https://api.herolab.online/v1';
+
+/**
+ * Default tool name. Used if no tool name is specified.
+ */
+const DEFAULT_TOOL_NAME = "de.dreiersoftware.hloApi";
 
 /** Headers sent with each request */
 const STANDARD_HEADERS = {
@@ -68,6 +73,58 @@ const sendRequest = async (fetchInstance: HLOApi["fetch"], path: string, request
 }
 
 /**
+ * Configuration for the HeroLab Online API.
+ */
+type APIConfiguration = {
+    /**
+     * User token for the Hero Lab Online API.
+     */
+    userToken: string,
+
+    /**
+     * Access token for all requests.
+     */
+    accessToken?: string,
+
+    /**
+     * Automatically handle access token generation and refresh.
+     */
+    autoTokenHandling?: boolean,
+
+    /**
+     * Tool name used for acquiring the access token.
+     */
+    toolName?: string
+}
+
+/**
+ * Internal configuration for the HeroLab Online API. Differs from the
+ * external configuration by making all fields except access token
+ * mandatory.
+ */
+ type InternalAPIConfiguration = {
+    /**
+     * User token for the Hero Lab Online API.
+     */
+    userToken: string,
+
+    /**
+     * Access token for all requests.
+     */
+    accessToken?: string,
+
+    /**
+     * Automatically handle access token generation and refresh.
+     */
+    autoTokenHandling: boolean,
+
+    /**
+     * Tool name used for acquiring the access token.
+     */
+    toolName: string
+}
+
+/**
  * Client class for the Hero Lab Online API.
  */
 class HLOApi {
@@ -80,18 +137,34 @@ class HLOApi {
     private fetch: (input?: string | Request , init?: RequestInit) => Promise<Response> = fetch as unknown as HLOApi["fetch"];
 
     /**
-     * Access token for all requests.
+     * API configuration.
      */
-    private accessToken: string;
+    private configuration: InternalAPIConfiguration;
 
     /**
      * Create a new API instance.
      *
-     * @param accessToken Access token for the Hero Lab Online API.
+     * @param userToken User token for the Hero Lab Online API.
      * @param fetchInstance Fetch implementation to be used by this API instance.
      */
-    constructor(accessToken: string, fetchInstance?: HLOApi["fetch"]) {
-        this.accessToken = accessToken;
+    constructor(options: APIConfiguration | string, fetchInstance?: HLOApi["fetch"]) {
+        // Initialize configuration
+        if (typeof options === 'object') {
+            this.configuration = {
+                userToken: options.userToken,
+                accessToken: options.accessToken,
+                autoTokenHandling: options.autoTokenHandling ===  undefined ? true : options.autoTokenHandling,
+                toolName: options.toolName || DEFAULT_TOOL_NAME
+            };
+        } else {
+            this.configuration = {
+                userToken: String(options),
+                autoTokenHandling: true,
+                toolName: DEFAULT_TOOL_NAME
+            }
+        }
+
+        // Set fetch instance
         if (fetchInstance) {
             this.fetch = fetchInstance;
         }
@@ -102,11 +175,34 @@ class HLOApi {
      *
      * @param path API path with leading /
      * @param request Request data
+     * @param accessTokenRequired Access token is required for this request
      * @returns Response data
      */
     private async sendRequest(path: string, request: HLOApiRequest): Promise<HLOApiResponse> {
-        request.accessToken = this.accessToken;
         return sendRequest(this.fetch, path, request);
+    }
+
+    /**
+     * Send a request to the API.
+     *
+     * @param path API path with leading /
+     * @param request Request data
+     * @param accessTokenRequired Access token is required for this request
+     * @returns Response data
+     */
+     private async sendRequestWithTokenHandling(path: string, request: HLOApiRequest): Promise<HLOApiResponse> {
+        if (request.accessToken === undefined) {
+            request.accessToken = await this.getAccessToken(request.callerId);
+        }
+        let result = await this.sendRequest(path, request);
+        if (result.result === ResultCode.BadApiToken && this.configuration.autoTokenHandling) {
+            // Access token expired
+            // Get new access token and retry request (once)
+            await this.refreshAccessToken();
+            request.accessToken = this.configuration.accessToken;
+            result = await sendRequest(this.fetch, path, request);
+        }
+        return result;
     }
 
     /**
@@ -117,29 +213,45 @@ class HLOApi {
      * @returns Response data.
      */
     async acquireAccessToken(request: AcquireAccessTokenRequest, setAccessToken = true): Promise<AcquireAccessTokenResponse> {
+        if (request.toolName === undefined) {
+            request.toolName = this.configuration.toolName;
+        }
+        if (request.refreshToken === undefined) {
+            request.refreshToken = this.configuration.userToken;
+        }
         const response = await this.sendRequest("/access/acquire-access-token", request) as AcquireAccessTokenResponse;
         if (setAccessToken && response.severity === Severity.Success && response.accessToken) {
-            this.accessToken = response.accessToken;
+            this.configuration.accessToken = response.accessToken;
         }
         return response;
     }
 
     /**
-     * Helper function to get an access token before creating an API instance.
+     * Refresh the access token before a request.
      *
-     * @param userToken User token
-     * @param fetchInstance Fetch implementation to be used for the request.
+     * @param callerId Caller ID for the request.
      */
-    static async getAccessToken(userToken: string, toolName: string, fetchInstance?: HLOApi["fetch"]): Promise<string> {
-        if (!fetchInstance) {
-            fetchInstance = fetch as unknown as HLOApi["fetch"];
-        }
-        const response = await sendRequest(fetchInstance, "/access/acquire-access-token", { refreshToken: userToken, toolName } as AcquireAccessTokenRequest) as AcquireAccessTokenResponse;
-        if (response.severity === Severity.Success) {
-            return response.accessToken;
-        } else {
+    private async refreshAccessToken(callerId?: number) {
+        const response = await this.acquireAccessToken({
+            toolName: this.configuration.toolName,
+            callerId: callerId || 0,
+            refreshToken: this.configuration.userToken
+        }, true);
+
+        if (response.severity !== Severity.Success) {
             throw new HLOApiError(response);
         }
+    }
+
+    /**
+     * Set the access token directly.
+     *
+     * @param accessToken Access token for the HeroLab Online API.
+     * @returns This API instance for method chaining.
+     */
+    setAccessToken(accessToken: string): HLOApi {
+        this.configuration.accessToken = accessToken;
+        return this;
     }
 
     /**
@@ -149,12 +261,42 @@ class HLOApi {
      * @returns Response data.
      */
     async verifyAccessToken(request: HLOApiRequest): Promise<HLOApiResponse> {
+        if (!request.accessToken) {
+            request.accessToken = this.configuration.accessToken;
+        }
         return this.sendRequest('/access/verify-access-token', request);
     }
 
     async getCharacter(request: GetCharacterRequest): Promise<GetCharacterResponse> {
-        return this.sendRequest('/character/get', request) as Promise<GetCharacterResponse>
+        return this.sendRequestWithTokenHandling('/character/get', request) as Promise<GetCharacterResponse>
+    }
+
+    /**
+     * Get the access token for a request. Acquires the access token if necessary.
+     *
+     * @param callerId Caller ID for the request.
+     * @returns Access token to use in the request.
+     * @throws {HLOApiError} Raised when access token was not provided and automated token handling is switched off,
+     * or when the access token could not be acquired from the API.
+     */
+    private async getAccessToken(callerId?: number): Promise<string> {
+        if (!this.configuration.accessToken) {
+            if (this.configuration.autoTokenHandling) {
+                await this.refreshAccessToken(callerId);
+            } else {
+                // In case of manual token handling, the access token must be set.
+                throw new HLOApiError({
+                    error: "No access token defined and automatic token handling switched off",
+                    severity: Severity.Error,
+                    result: ResultCode.BadApiToken,
+                    callerId: callerId || 0
+                });
+            }
+        }
+
+        // Access token is set if refreshAccessToken did not raise an error
+        return this.configuration.accessToken as string;
     }
 }
 
-export default HLOApi;
+export { HLOApi as default, APIConfiguration };
