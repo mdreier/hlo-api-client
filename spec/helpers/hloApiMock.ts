@@ -1,7 +1,7 @@
 import 'url';
 import { ResultCode, Severity } from '../../src/constants.js';
 import fetchMock from 'fetch-mock';
-import { ExportFormat } from '../../src/export.js';
+import characters from './characters.js';
 
 const Tokens = {
     valid: {
@@ -15,12 +15,6 @@ const Tokens = {
         element: "INVALID_ELEMENT_TOKEN"
     }
 };
-
-const Exports = {
-    singleCharacter: {
-
-    } as ExportFormat
-}
 
 class HeroLabOnlineApi {
 
@@ -122,7 +116,7 @@ class HeroLabOnlineApi {
                     callerId: content.callerId,
                     severity: content.elementToken === Tokens.valid.singleCharacter ? Severity.Success : Severity.Error,
                     result: content.elementToken === Tokens.valid.singleCharacter ? 0 : ResultCode.BadElementToken,
-                    export: content.elementToken === Tokens.valid.singleCharacter ? Exports.singleCharacter : undefined
+                    export: content.elementToken === Tokens.valid.singleCharacter ? characters.fullExport : undefined
                 });
             default:
                 return this.respond({

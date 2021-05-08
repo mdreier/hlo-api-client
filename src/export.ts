@@ -61,7 +61,11 @@ interface ExportFormat {
          * Version of the export format itself. When this changes, there could be implications
          * across the export format.
          */
-        exportVersion: number
+        exportVersion: number,
+        /**
+         * Copyright statement.
+         */
+        legal?: string
     },
     /**
      * The actors section is the meat of the export format, as it contains all of the actual character
