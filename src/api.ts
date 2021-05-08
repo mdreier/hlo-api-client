@@ -1,4 +1,4 @@
-import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse, GetCharacterRequest, GetCharacterResponse, GetCharacterBulkRequest, GetCharacterBulkResponse } from './interactions';
+import { AcquireAccessTokenRequest, AcquireAccessTokenResponse, HLOApiRequest, HLOApiResponse, GetCharacterRequest, GetCharacterResponse, GetCharacterBulkRequest, GetCharacterBulkResponse, GetCastListRequest, GetCastListResponse } from './interactions';
 import fetch from 'node-fetch';
 import { ResultCode, Severity } from './constants.js';
 import { HLOApiError } from './error.js';
@@ -324,6 +324,42 @@ class HLOApiClient {
 
         // Access token is set if refreshAccessToken did not raise an error
         return this.configuration.accessToken as string;
+    }
+
+    /**
+     * Common method for requesting cast lists.
+     *
+     * @param path Path to the API endpoint.
+     * @param request Campaign token or full request.
+     * @returns Response containing cast list.
+     */
+    private async getCastList(path: string, request: GetCastListRequest | string): Promise<GetCastListResponse> {
+        if (typeof request !== 'object') {
+            request = {
+                campaignToken: String(request)
+            }
+        }
+        return this.sendRequestWithTokenHandling(path, request) as Promise<GetCastListResponse>;
+    }
+
+    /**
+     * Obtain the cast members that currently reside on a campaign's stage.
+     *
+     * @param request Campaign token or full request.
+     * @returns Response containing cast list.
+     */
+    async getStage(request: GetCastListRequest | string): Promise<GetCastListResponse> {
+        return this.getCastList('/campaign/get-stage', request);
+    }
+
+    /**
+     * Obtain the player characters that currently reside on a campaign's stage.
+     *
+     * @param request Campaign token or full request.
+     * @returns Response containing cast list.
+     */
+    async getPlayerCharacters(request: GetCastListRequest | string): Promise<GetCastListResponse> {
+        return this.getCastList('/campaign/get-pcs', request);
     }
 }
 

@@ -186,5 +186,30 @@ interface GetCharacterBulkResponse extends HLOApiResponse {
     characters: GetCharacterIndividualResponse[];
 }
 
+/**
+ * Request to read the cast list for a campaign.
+ */
+interface GetCastListRequest extends HLOApiRequest {
+    /**
+     * Campaign token for which to retrieve the cast members currently on the stage.
+     */
+    campaignToken: string;
+}
+
+/**
+ * Response for reading the cast list for a campaign.
+ */
+interface GetCastListResponse extends HLOApiResponse {
+    /**
+     * Minimum interval that the caller must wait until making another retrieval request to the API (in milliseconds).
+     */
+    wait: number;
+    /**
+     * Array of one or more strings that identify the ids of the PC cast members.
+     */
+    castList: string[];
+}
+
 export { HLOApiRequest, HLOApiResponse, AcquireAccessTokenRequest, AcquireAccessTokenResponse, GetCharacterRequest,
-    GetCharacterResponse, GetCharacterIndividualRequest, GetCharacterBulkRequest, GetCharacterIndividualResponse, GetCharacterBulkResponse };
+    GetCharacterResponse, GetCharacterIndividualRequest, GetCharacterBulkRequest, GetCharacterIndividualResponse, GetCharacterBulkResponse,
+    GetCastListRequest, GetCastListResponse };

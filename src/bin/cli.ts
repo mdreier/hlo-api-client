@@ -15,11 +15,17 @@ type ValidateResponse = {
 }
 
 type GetCharacterInput = {
-    elementToken: string
+    elementToken: string,
+    castId: string
 }
 
 type GetCharacterBulkInput = {
     elementTokens: string
+}
+
+type GetCastListInput = {
+    campaignToken: string,
+    onlyPlayerCharacters: boolean
 }
 
 /**
@@ -30,7 +36,8 @@ const Actions = {
     EXIT: 'Exit',
     VERIFY: 'Verify Acccess Token',
     GET_CHARACTER: 'Get Character',
-    GET_BULK: 'Get multiple characters'
+    GET_BULK: 'Get multiple characters',
+    GET_CAST_LIST: 'Get cast list'
 }
 
 const TOOLNAME = "HeroLab Online CLI";
@@ -73,6 +80,7 @@ export default class HLOCli {
                 choices: [
                     Actions.GET_CHARACTER,
                     Actions.GET_BULK,
+                    Actions.GET_CAST_LIST,
                     Actions.VERIFY,
                     Actions.EXIT
                 ]
@@ -89,6 +97,9 @@ export default class HLOCli {
                     break;
                 case Actions.GET_BULK:
                     await this.getCharacterBulk();
+                    break;
+                case Actions.GET_CAST_LIST:
+                    await this.getCastList();
                     break;
             }
         }
@@ -127,18 +138,28 @@ export default class HLOCli {
             {
                 name: 'elementToken',
                 message: 'Element Token'
+            },
+            {
+                name: 'castId',
+                message: 'Cast ID (only for campaigns)'
             }
         ]) as GetCharacterInput;
 
-        const response = await this.api.getCharacter({elementToken: input.elementToken});
-        if (response.status === CharacterChangeStatus.Missing) {
-            process.stdout.write("Character not found");
-        } else if (response.status === CharacterChangeStatus.Unchanged) {
-            process.stdout.write("Character unchanged");
-        } else if (response.export) {
-            process.stdout.write(`${JSON.stringify(response.export)}`);
+        let characterData;
+        if (input.castId) {
+            const response = await(this.api.getCharacters({characters: [{elementToken: input.elementToken, castId: input.castId}]}));
+            characterData = response.characters[0];
         } else {
-            process.stdout.write("No character data received");
+            characterData = await this.api.getCharacter({elementToken: input.elementToken});
+        }
+        if (characterData.status === CharacterChangeStatus.Missing) {
+            process.stdout.write("Character not found\n");
+        } else if (characterData.status === CharacterChangeStatus.Unchanged) {
+            process.stdout.write("Character unchanged\n");
+        } else if (characterData.export) {
+            process.stdout.write(`${JSON.stringify(characterData.export)}\n`);
+        } else {
+            process.stdout.write("No character data received\n");
         }
     }
 
@@ -153,15 +174,37 @@ export default class HLOCli {
         const response = await this.api.getCharacters(input.elementTokens.split(/\s*,\s*/));
         for (const character of response.characters) {
             if (character.status === CharacterChangeStatus.Missing) {
-                process.stdout.write(`Character ${character.elementToken} not found`);
+                process.stdout.write(`Character ${character.elementToken} not found\n`);
             } else if (character.status === CharacterChangeStatus.Unchanged) {
-                process.stdout.write(`Character ${character.elementToken} unchanged`);
+                process.stdout.write(`Character ${character.elementToken} unchanged\n`);
             } else if (character.export) {
-                process.stdout.write(`${character.elementToken}: ${JSON.stringify(character.export)}`);
+                process.stdout.write(`${character.elementToken}: ${JSON.stringify(character.export)}\n`);
             } else {
-                process.stdout.write(`No character data received for ${character.elementToken}`);
+                process.stdout.write(`No character data received for ${character.elementToken}\n`);
             }
         }
+    }
+
+    async getCastList(): Promise<void> {
+        const input = await inquirer.prompt([
+            {
+                name: 'campaignToken',
+                message: 'Campaign Token'
+            },
+            {
+                name: 'onlyPlayerCharacters',
+                message: 'Only player characters?',
+                type: 'confirm'
+            }
+        ]) as GetCastListInput;
+
+        let response;
+        if (input.onlyPlayerCharacters) {
+            response = await this.api.getPlayerCharacters(input.campaignToken);
+        } else {
+            response = await this.api.getStage(input.campaignToken);
+        }
+        process.stdout.write(`${JSON.stringify(response.castList)}\n`);
     }
 };
 
