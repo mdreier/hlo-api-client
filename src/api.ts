@@ -312,4 +312,4 @@ class HLOApi {
     }
 }
 
-export { HLOApi as default, APIConfiguration };
+export { HLOApi, APIConfiguration };

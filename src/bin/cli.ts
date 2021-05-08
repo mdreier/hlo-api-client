@@ -2,7 +2,7 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 import os from 'os';
-import HLOApi from '../api.js';
+import { HLOApi } from '../api.js';
 import { CharacterChangeStatus, Severity } from '../constants.js'
 
 type MainLoopResponse = {

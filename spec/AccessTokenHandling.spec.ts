@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import HLOApi from '../src/api.js';
+import { HLOApi } from '../src/api.js';
 import { ResultCode, Severity } from '../src/constants.js'
 import { HLOApiError } from '../src/error.js';
 import { describe, it } from '../test/jasmine.js'
