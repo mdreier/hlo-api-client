@@ -80,6 +80,8 @@ All API methods are asynchronous. To call an API method, you generally have two 
 In either case the method returns a Promise which resolves with a result object. This object contains the response status as well as
 the response data (e.g. the character export).
 
+For further details, check out the [documentation of the API client](https://mdreier.github.io/hlo-api-client/).
+
 ### Error Handling
 
 The API client mirrors the error behavior of the API. This means that most failures will not throw a JavaScript error, but rather have
