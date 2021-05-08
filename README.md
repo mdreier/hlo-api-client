@@ -100,4 +100,6 @@ if (response.severity !== Severity.Success) {
 Errors are generally only raised if:
 
 * Communication with the server fails, e.g. due to network issues
-* Mandatory parameters, such as the access token, are missing in the call
+* Mandatory parameters, such as the access token, are missing in the call. This should not occur if you are using the TypeScript definitions,
+  as all mandatory parameters are marked as such. It may happen in the case of manual access token handling, or if the API client is used
+  in plain JavScript.
