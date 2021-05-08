@@ -1,17 +1,26 @@
 import 'url';
 import { ResultCode, Severity } from '../../src/constants.js';
 import fetchMock from 'fetch-mock';
+import { ExportFormat } from '../../src/export.js';
 
 const Tokens = {
     valid: {
         user: "VALID_USER_TOKEN",
-        access: "VALID_ACCESS_TOKEN"
+        access: "VALID_ACCESS_TOKEN",
+        singleCharacter: "VALID_SINGLE_CHARACTER_TOKEN"
     },
     invalid: {
         user: "INVALID_USER_TOKEN",
-        access: "INVALID_ACCESS_TOKEN"
+        access: "INVALID_ACCESS_TOKEN",
+        element: "INVALID_ELEMENT_TOKEN"
     }
 };
+
+const Exports = {
+    singleCharacter: {
+
+    } as ExportFormat
+}
 
 class HeroLabOnlineApi {
 
@@ -75,7 +84,7 @@ class HeroLabOnlineApi {
                 return this.respond({
                     callerId: content.callerId ? content.callerId : undefined,
                     result: accessTokenValid ? 0 : ResultCode.BadApiToken,
-                    severity: accessTokenValid ? Severity.Success : Severity.Error,
+                    severity: accessTokenValid ? Severity.Success : Severity.Error
                 });
             case "identify-game-server":
             case "identify-notification-server":
@@ -99,11 +108,29 @@ class HeroLabOnlineApi {
 
     handleCharacter(url: string, opts: fetchMock.MockOptionsMethodPost): Record<string, unknown> {
         const content = JSON.parse(String(opts.body)) as Record<string, unknown>;
-        return this.respond({
-            callerId: content.callerId ? content.callerId : undefined,
-            result: ResultCode.UnspecifiedError,
-            severity: Severity.Error
-        });
+        const accessTokenValid = content.accessToken === Tokens.valid.access;
+        if (!accessTokenValid) {
+            return this.respond({
+                callerId: content.callerId ? content.callerId : undefined,
+                result: ResultCode.BadApiToken,
+                severity: Severity.Error
+            });
+        }
+        switch(this.getOperation(url)) {
+            case "get":
+                return this.respond({
+                    callerId: content.callerId,
+                    severity: content.elementToken === Tokens.valid.singleCharacter ? Severity.Success : Severity.Error,
+                    result: content.elementToken === Tokens.valid.singleCharacter ? 0 : ResultCode.BadElementToken,
+                    export: content.elementToken === Tokens.valid.singleCharacter ? Exports.singleCharacter : undefined
+                });
+            default:
+                return this.respond({
+                    callerId: content.callerId ? content.callerId : undefined,
+                    result: ResultCode.UnspecifiedError,
+                    severity: Severity.Error
+                });
+        }
     }
 
     handleCampaign(url: string, opts: fetchMock.MockOptionsMethodPost): Record<string, unknown> {
