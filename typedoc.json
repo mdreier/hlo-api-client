@@ -1,0 +1,6 @@
+{
+    "entryPoints": "./src/index.ts",
+    "name": "HeroLab Online API Client",
+    "includeVersion": true,
+    "excludePrivate": true
+}

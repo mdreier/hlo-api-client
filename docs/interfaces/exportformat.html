@@ -1,0 +1,569 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ExportFormat | HeroLab Online API Client - v1.0.0</title>
+	<meta name="description" content="Documentation for HeroLab Online API Client - v1.0.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">HeroLab Online API Client - v1.0.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">HeroLab Online API Client - v1.0.0</a>
+				</li>
+				<li>
+					<a href="exportformat.html">ExportFormat</a>
+				</li>
+			</ul>
+			<h1>Interface ExportFormat</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Definition of the export format.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ExportFormat</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exportformat.html#actors" class="tsd-kind-icon">actors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exportformat.html#deletedactors" class="tsd-kind-icon">deleted<wbr>Actors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exportformat.html#deleteditems" class="tsd-kind-icon">deleted<wbr>Items</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exportformat.html#metadata" class="tsd-kind-icon">metadata</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exportformat.html#moveditems" class="tsd-kind-icon">moved<wbr>Items</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="exportformat.html#portfolio" class="tsd-kind-icon">portfolio</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="actors" class="tsd-anchor"></a>
+					<h3>actors</h3>
+					<div class="tsd-signature tsd-kind-icon">actors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api/blob/25cf9ff/src/export.ts#L79">src/export.ts:79</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The actors section is the meat of the export format, as it contains all of the actual character
+								information. The &quot;actors&quot; object is always present and holds one or more properties that
+								identify the various individual actors that comprise the overall character. If a character is a
+								simple Fighter, then there will be a single actor, but more complex characters may have minions
+							that are also included as separate actors (e.g. animal companions, drones, etc.).</p>
+						</div>
+						<p>Each actor is identified by a unique value that never changes. The primary character is always
+							assigned a value of one (and sometimes referred to as the lead actor). The list of properties
+							within the actors section is simply a list of the actors by their id, with the lead actor
+							always appearing first. Within each of these properties, the full details of that actor will be
+						found as an object, making each a self-contained unit.</p>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>actorName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-symbol">{ </span>gameValues<span class="tsd-signature-symbol">: </span><a href="gamevalues.html" class="tsd-signature-type" data-tsd-kind="Interface">GameValues</a><span class="tsd-signature-symbol">; </span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>The structure of an actorobjectbreaks down the actor into a small number of standard
+										aspects and the game-specific details.</p>
+									</div>
+								</div>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>game<wbr>Values<span class="tsd-signature-symbol">: </span><a href="gamevalues.html" class="tsd-signature-type" data-tsd-kind="Interface">GameValues</a></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Object containing all of the game-specific properties for the actor. These are all
+												simple properties, so please refer to the specific game system section for details.</p>
+											</div>
+										</div>
+									</li>
+									<li class="tsd-parameter">
+										<h5>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Object containing the collection of game-specific elements that comprise the
+												character, encompassing all ability scores, skills, equipment, spells, etc.</p>
+											</div>
+											<p>Within the &quot;items&quot; object, the structure is similar to the &quot;actors&quot; object. Each
+												item is a uniquely named property within the object. It is possible that two items
+												on a character represent the same general entity (e.g. two separate daggers), so
+											each incorporates a unique value that guarantees distinction.</p>
+										</div>
+										<ul class="tsd-parameters">
+											<li class="tsd-parameter-index-signature">
+												<h5><span class="tsd-signature-symbol">[</span>itemId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="baseitem.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseItem</a></h5>
+											</li>
+										</ul>
+									</li>
+									<li class="tsd-parameter">
+										<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Name given to the actor by the user.</p>
+											</div>
+										</div>
+									</li>
+									<li class="tsd-parameter">
+										<h5>player<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Name of the player controlling the character (as entered by the user).</p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="deletedactors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> deleted<wbr>Actors</h3>
+					<div class="tsd-signature tsd-kind-icon">deleted<wbr>Actors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api/blob/25cf9ff/src/export.ts#L174">src/export.ts:174</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Deleting an actor from a character causes two different behaviors. First, a new &quot;deletedActors&quot;
+								property appears at the topmost levelthat contains an array of the actors that have been deleted.
+								Secondly, all of the items belonging to the actor that were deleted are included within the
+							&quot;deletedItems&quot; object.</p>
+						</div>
+						<p>The primary character can never be deleted, so the actor with id 1 will always be present. All
+						other actors can come and go, but &quot;actor.1&quot; will always remain.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="deleteditems" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> deleted<wbr>Items</h3>
+					<div class="tsd-signature tsd-kind-icon">deleted<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api/blob/25cf9ff/src/export.ts#L120">src/export.ts:120</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Items will occasionally be deleted from a character. When this occurs, the differential
+								export will include a new property named &quot;deletedItems&quot;. This property will appear at
+								the topmost level and is an object that lists every item deleted from any actors across
+								the entire portfolio. Each deleted item is an object whose name is the deleted item
+							and whose lone property identifies the containing item from which it was deleted.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>itemId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-symbol">{ </span>fromActor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>fromItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>from<wbr>Actor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Actor that previously possessed the deleted item.</p>
+											</div>
+										</div>
+									</li>
+									<li class="tsd-parameter">
+										<h5>from<wbr>Item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Item that previously contained the deleted item(null when deleted directly from
+												the actor and not a containingitem)</p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="metadata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> metadata</h3>
+					<div class="tsd-signature tsd-kind-icon">metadata<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>exportVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>gameCode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>gameMajor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>gameMinor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>gameName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>hloVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api/blob/25cf9ff/src/export.ts#L33">src/export.ts:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The metadata section outlines an assortment of important internal details about HLO that can
+							impact the export contents. The &quot;metadata&quot; object is only included when a full export occurs.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>export<wbr>Version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Version of the export format itself. When this changes, there could be implications
+										across the export format.</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>game<wbr>Code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Unique identifier for the game system within HLO</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>game<wbr>Major<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Major version number of the game system data files. Each game system has distinct data
+											files with its own version. When the major version changes, the contents of an export
+											are likely to change in some manner, so differential exports acrossmajor version changes
+										should not be used.</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>game<wbr>Minor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Minor version number of the game system data files. When the minor version changes,
+											differential exports should be safe, as this typically indicates smaller changes and
+										bug fixes.</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>game<wbr>Name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Friendly name of the game system to which the character applies</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>hlo<wbr>Version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Version of the HLO engine. Changes to the engine should not typically impact the export
+										data, but this value could be helpful in isolating bugs.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="moveditems" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> moved<wbr>Items</h3>
+					<div class="tsd-signature tsd-kind-icon">moved<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api/blob/25cf9ff/src/export.ts#L142">src/export.ts:142</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Items can also be moved from one location within the character to another.When this occurs,
+								the moved item will disappear from beneath its old container and appear beneath its new
+								container. In addition, the differential export will include a new object named &quot;movedItems&quot;
+								at the topmost level. This object contains entries for each item that has been moved anywhere
+								within the portfolio, where each identifies both the containing items from which it was moved
+							and the new item that it now appears beneath.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>itemId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-symbol">{ </span>fromActor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>fromItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>toActor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>toItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>from<wbr>Actor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Actor that previously possessed the moved item.</p>
+											</div>
+										</div>
+									</li>
+									<li class="tsd-parameter">
+										<h5>from<wbr>Item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Item that previously contained the moved item (nullwhen moved directly from the actor
+												and not a containing item).</p>
+											</div>
+										</div>
+									</li>
+									<li class="tsd-parameter">
+										<h5>to<wbr>Actor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Actor that now possesses the moved item.</p>
+											</div>
+										</div>
+									</li>
+									<li class="tsd-parameter">
+										<h5>to<wbr>Item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Item beneath which the moved item now resides(null when moved directly to an actor
+												and not into a containing item).</p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="portfolio" class="tsd-anchor"></a>
+					<h3>portfolio</h3>
+					<div class="tsd-signature tsd-kind-icon">portfolio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>baseline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>charId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api/blob/25cf9ff/src/export.ts#L10">src/export.ts:10</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The portfolio section provides basic details about the character and the export data returned.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>baseline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Baseline version of the character against which a differential export was generated.
+											Character data can become large and only small portions may change. The export mechanism
+											can optionally report only the differences between an older version and the current
+											version. The baseline indicates the older version that the export contains the differences
+										from. A baseline of zero indicates the full character is reported.</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>char<wbr>Id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Unique identifier for the character within HLO</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Current version of the character within HLO. Whenever a character is modified in some way,
+										its version is increased, and this value reflects the version at the time it was exported.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="../classes/hloapi.html" class="tsd-kind-icon">HLOApi</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/hloapierror.html" class="tsd-kind-icon">HLOApi<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="acquireaccesstokenrequest.html" class="tsd-kind-icon">Acquire<wbr>Access<wbr>Token<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="acquireaccesstokenresponse.html" class="tsd-kind-icon">Acquire<wbr>Access<wbr>Token<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="baseitem.html" class="tsd-kind-icon">Base<wbr>Item</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="exportformat.html" class="tsd-kind-icon">Export<wbr>Format</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="exportformat.html#actors" class="tsd-kind-icon">actors</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="exportformat.html#deletedactors" class="tsd-kind-icon">deleted<wbr>Actors</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="exportformat.html#deleteditems" class="tsd-kind-icon">deleted<wbr>Items</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="exportformat.html#metadata" class="tsd-kind-icon">metadata</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="exportformat.html#moveditems" class="tsd-kind-icon">moved<wbr>Items</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="exportformat.html#portfolio" class="tsd-kind-icon">portfolio</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="gamevalues.html" class="tsd-kind-icon">Game<wbr>Values</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="gamevaluespathfinder2.html" class="tsd-kind-icon">Game<wbr>Values<wbr>Pathfinder2</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="gamevaluesstarfinder.html" class="tsd-kind-icon">Game<wbr>Values<wbr>Starfinder</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="getcharacterrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="getcharacterresponse.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="hloapirequest.html" class="tsd-kind-icon">HLOApi<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="hloapiresponse.html" class="tsd-kind-icon">HLOApi<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="itempathfinder2.html" class="tsd-kind-icon">Item<wbr>Pathfinder2</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="itemstarfinder.html" class="tsd-kind-icon">Item<wbr>Starfinder</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="storeditem.html" class="tsd-kind-icon">Stored<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#apiconfiguration" class="tsd-kind-icon">APIConfiguration</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#carryinglevel" class="tsd-kind-icon">Carrying<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#characterchangestatus" class="tsd-kind-icon">Character<wbr>Change<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#resultcode" class="tsd-kind-icon">Result<wbr>Code</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#severity" class="tsd-kind-icon">Severity</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../modules.html#size" class="tsd-kind-icon">Size</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
