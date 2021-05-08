@@ -95,6 +95,9 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hloapiclient.html#acquireaccesstoken" class="tsd-kind-icon">acquire<wbr>Access<wbr>Token</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hloapiclient.html#getcharacter" class="tsd-kind-icon">get<wbr>Character</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hloapiclient.html#getcharacters" class="tsd-kind-icon">get<wbr>Characters</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hloapiclient.html#getplayercharacters" class="tsd-kind-icon">get<wbr>Player<wbr>Characters</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hloapiclient.html#getstage" class="tsd-kind-icon">get<wbr>Stage</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hloapiclient.html#setaccesstoken" class="tsd-kind-icon">set<wbr>Access<wbr>Token</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hloapiclient.html#verifyaccesstoken" class="tsd-kind-icon">verify<wbr>Access<wbr>Token</a></li>
 							</ul>
@@ -114,7 +117,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ffe1bf7/src/api.ts#L142">src/api.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L142">src/api.ts:142</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -172,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ffe1bf7/src/api.ts#L215">src/api.ts:215</a></li>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L215">src/api.ts:215</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -210,7 +213,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ffe1bf7/src/api.ts#L278">src/api.ts:278</a></li>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L278">src/api.ts:278</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -233,6 +236,102 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getcharacters" class="tsd-anchor"></a>
+					<h3>get<wbr>Characters</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Characters<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><a href="../interfaces/getcharacterbulkrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterBulkRequest</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/getcharacterbulkresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterBulkResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L293">src/api.ts:293</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Read multiple characters in bulk.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>request: <a href="../interfaces/getcharacterbulkrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterBulkRequest</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Array of element tokens or full request.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/getcharacterbulkresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterBulkResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Response data with character information.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getplayercharacters" class="tsd-anchor"></a>
+					<h3>get<wbr>Player<wbr>Characters</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Player<wbr>Characters<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/getcastlistrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/getcastlistresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L361">src/api.ts:361</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Obtain the player characters that currently reside on a campaign&#39;s stage.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>request: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/getcastlistrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListRequest</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Campaign token or full request.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/getcastlistresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Response containing cast list.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getstage" class="tsd-anchor"></a>
+					<h3>get<wbr>Stage</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Stage<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/getcastlistrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/getcastlistresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L351">src/api.ts:351</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Obtain the cast members that currently reside on a campaign&#39;s stage.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>request: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/getcastlistrequest.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListRequest</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Campaign token or full request.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/getcastlistresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Response containing cast list.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="setaccesstoken" class="tsd-anchor"></a>
 					<h3>set<wbr>Access<wbr>Token</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -242,7 +341,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ffe1bf7/src/api.ts#L252">src/api.ts:252</a></li>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L252">src/api.ts:252</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -274,7 +373,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ffe1bf7/src/api.ts#L263">src/api.ts:263</a></li>
+									<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/api.ts#L263">src/api.ts:263</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -323,6 +422,15 @@
 								<a href="hloapiclient.html#getcharacter" class="tsd-kind-icon">get<wbr>Character</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="hloapiclient.html#getcharacters" class="tsd-kind-icon">get<wbr>Characters</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="hloapiclient.html#getplayercharacters" class="tsd-kind-icon">get<wbr>Player<wbr>Characters</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="hloapiclient.html#getstage" class="tsd-kind-icon">get<wbr>Stage</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="hloapiclient.html#setaccesstoken" class="tsd-kind-icon">set<wbr>Access<wbr>Token</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -355,6 +463,24 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/gamevaluesstarfinder.html" class="tsd-kind-icon">Game<wbr>Values<wbr>Starfinder</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/getcastlistrequest.html" class="tsd-kind-icon">Get<wbr>Cast<wbr>List<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/getcastlistresponse.html" class="tsd-kind-icon">Get<wbr>Cast<wbr>List<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/getcharacterbulkrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Bulk<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/getcharacterbulkresponse.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Bulk<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/getcharacterindividualrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Individual<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/getcharacterindividualresponse.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Individual<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/getcharacterrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Request</a>

@@ -63,6 +63,7 @@
 				</a>
 				<p>This package is a JavaScript/TypeScript client for the Hero Lab Online API. It contains a fully typed interface for all methods exposed
 				by the API and is ready for use with Node.js.</p>
+				<p>The API client supports all read methods for characters and campaigns. It does currently not support subscriptions, this is planned for a future version.</p>
 				<p>This software is not affiliated with Lone Wolf Development in any way. &quot;Hero Lab&quot; and &quot;Hero Lab Online&quot; are trademarked by LoneWolf Development</p>
 				<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
 					<h2>API Documentation</h2>
@@ -94,7 +95,7 @@
 				user token and <strong>their</strong> element token(s).</p>
 				<p>:warning: Generally, the API client does not wrap too much intelligence around the raw API methods. Therefor it is recommended to read through the
 					<a href="#api-documentation">API documentation</a> before using the client to understand how the API works. This helps to understand how to use the methods and
-				also why certain errors may occur.</p>
+				also why certain errors may occur. This is especially true regarding the wait time.</p>
 				<a href="#initialize-the-api" id="initialize-the-api" style="color: inherit; text-decoration: none;">
 					<h3>Initialize the API</h3>
 				</a>
@@ -152,7 +153,9 @@
 				<p>Errors are generally only raised if:</p>
 				<ul>
 					<li>Communication with the server fails, e.g. due to network issues</li>
-					<li>Mandatory parameters, such as the access token, are missing in the call</li>
+					<li>Mandatory parameters, such as the access token, are missing in the call. This should not occur if you are using the TypeScript definitions,
+						as all mandatory parameters are marked as such. It may happen in the case of manual access token handling, or if the API client is used
+					in plain JavScript.</li>
 				</ul>
 			</div>
 		</div>
@@ -192,6 +195,24 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/gamevaluesstarfinder.html" class="tsd-kind-icon">Game<wbr>Values<wbr>Starfinder</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/getcastlistrequest.html" class="tsd-kind-icon">Get<wbr>Cast<wbr>List<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/getcastlistresponse.html" class="tsd-kind-icon">Get<wbr>Cast<wbr>List<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/getcharacterbulkrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Bulk<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/getcharacterbulkresponse.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Bulk<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/getcharacterindividualrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Individual<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/getcharacterindividualresponse.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Individual<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/getcharacterrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Request</a>

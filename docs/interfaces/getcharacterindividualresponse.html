@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>HLOApiResponse | HeroLab Online API Client - v1.0.0</title>
+	<title>GetCharacterIndividualResponse | HeroLab Online API Client - v1.0.0</title>
 	<meta name="description" content="Documentation for HeroLab Online API Client - v1.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">HeroLab Online API Client - v1.0.0</a>
 				</li>
 				<li>
-					<a href="hloapiresponse.html">HLOApiResponse</a>
+					<a href="getcharacterindividualresponse.html">GetCharacterIndividualResponse</a>
 				</li>
 			</ul>
-			<h1>Interface HLOApiResponse</h1>
+			<h1>Interface GetCharacterIndividualResponse</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Hero Lab Online API Response.</p>
+						<p>Individual character in a bulk response.</p>
 					</div>
 				</div>
 			</section>
@@ -76,21 +76,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">HLOApiResponse</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="acquireaccesstokenresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">AcquireAccessTokenResponse</a>
-							</li>
-							<li>
-								<a href="getcharacterresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterResponse</a>
-							</li>
-							<li>
-								<a href="getcharacterbulkresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterBulkResponse</a>
-							</li>
-							<li>
-								<a href="getcastlistresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListResponse</a>
-							</li>
-						</ul>
+						<span class="target">GetCharacterIndividualResponse</span>
 					</li>
 				</ul>
 			</section>
@@ -101,10 +87,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#callerid" class="tsd-kind-icon">caller<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#error" class="tsd-kind-icon">error</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#result" class="tsd-kind-icon">result</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#severity" class="tsd-kind-icon">severity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getcharacterindividualresponse.html#castid" class="tsd-kind-icon">cast<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getcharacterindividualresponse.html#elementtoken" class="tsd-kind-icon">element<wbr>Token</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getcharacterindividualresponse.html#export" class="tsd-kind-icon">export</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getcharacterindividualresponse.html#status" class="tsd-kind-icon">status</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,63 +99,63 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="callerid" class="tsd-anchor"></a>
-					<h3>caller<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">caller<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="castid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cast<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">cast<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L26">src/interactions.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L162">src/interactions.ts:162</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Whatever value was included inthe request is parroted back in the response.</p>
+							<p>Identical token passed in by the request.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="error" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> error</h3>
-					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="elementtoken" class="tsd-anchor"></a>
+					<h3>element<wbr>Token</h3>
+					<div class="tsd-signature tsd-kind-icon">element<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L39">src/interactions.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L158">src/interactions.ts:158</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>If an error occurred, this will be a plain text explanation of what went wrong that will hopefully be
-							helpful incorrecting the problem; Omitted if the request was successful</p>
+							<p>Identical token passed in for the corresponding requested character.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="result" class="tsd-anchor"></a>
-					<h3>result</h3>
-					<div class="tsd-signature tsd-kind-icon">result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="export" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> export</h3>
+					<div class="tsd-signature tsd-kind-icon">export<span class="tsd-signature-symbol">:</span> <a href="exportformat.html" class="tsd-signature-type" data-tsd-kind="Interface">ExportFormat</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L30">src/interactions.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L171">src/interactions.ts:171</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Result code identifying what happened with the request.</p>
+							<p>Export data for the character (or null/omitted if none is returned).</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="severity" class="tsd-anchor"></a>
-					<h3>severity</h3>
-					<div class="tsd-signature tsd-kind-icon">severity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="status" class="tsd-anchor"></a>
+					<h3>status</h3>
+					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L34">src/interactions.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L167">src/interactions.ts:167</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Severity level of the result, which will be one of a fewset values.</p>
+							<p>Indicates the status of the requested character and the nature of the reported export data; See
+							constant CharacterChangeStatus for the values that can be returned.</p>
 						</div>
 					</div>
 				</section>
@@ -227,9 +213,27 @@
 					<li class=" tsd-kind-interface">
 						<a href="getcharacterindividualrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Individual<wbr>Request</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="getcharacterindividualresponse.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Individual<wbr>Response</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="getcharacterindividualresponse.html#castid" class="tsd-kind-icon">cast<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="getcharacterindividualresponse.html#elementtoken" class="tsd-kind-icon">element<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="getcharacterindividualresponse.html#export" class="tsd-kind-icon">export</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="getcharacterindividualresponse.html#status" class="tsd-kind-icon">status</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="getcharacterrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Request</a>
 					</li>
@@ -239,27 +243,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="hloapirequest.html" class="tsd-kind-icon">HLOApi<wbr>Request</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="hloapiresponse.html" class="tsd-kind-icon">HLOApi<wbr>Response</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#callerid" class="tsd-kind-icon">caller<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#error" class="tsd-kind-icon">error</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#result" class="tsd-kind-icon">result</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#severity" class="tsd-kind-icon">severity</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="itempathfinder2.html" class="tsd-kind-icon">Item<wbr>Pathfinder2</a>
 					</li>

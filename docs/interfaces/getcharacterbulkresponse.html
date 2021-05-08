@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>HLOApiResponse | HeroLab Online API Client - v1.0.0</title>
+	<title>GetCharacterBulkResponse | HeroLab Online API Client - v1.0.0</title>
 	<meta name="description" content="Documentation for HeroLab Online API Client - v1.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">HeroLab Online API Client - v1.0.0</a>
 				</li>
 				<li>
-					<a href="hloapiresponse.html">HLOApiResponse</a>
+					<a href="getcharacterbulkresponse.html">GetCharacterBulkResponse</a>
 				</li>
 			</ul>
-			<h1>Interface HLOApiResponse</h1>
+			<h1>Interface GetCharacterBulkResponse</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Hero Lab Online API Response.</p>
+						<p>Response for reading characters in bulk.</p>
 					</div>
 				</div>
 			</section>
@@ -76,19 +76,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">HLOApiResponse</span>
+						<a href="hloapiresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">HLOApiResponse</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="acquireaccesstokenresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">AcquireAccessTokenResponse</a>
-							</li>
-							<li>
-								<a href="getcharacterresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterResponse</a>
-							</li>
-							<li>
-								<a href="getcharacterbulkresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterBulkResponse</a>
-							</li>
-							<li>
-								<a href="getcastlistresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCastListResponse</a>
+								<span class="target">GetCharacterBulkResponse</span>
 							</li>
 						</ul>
 					</li>
@@ -101,10 +92,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#callerid" class="tsd-kind-icon">caller<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#error" class="tsd-kind-icon">error</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#result" class="tsd-kind-icon">result</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hloapiresponse.html#severity" class="tsd-kind-icon">severity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="getcharacterbulkresponse.html#callerid" class="tsd-kind-icon">caller<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getcharacterbulkresponse.html#characters" class="tsd-kind-icon">characters</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="getcharacterbulkresponse.html#error" class="tsd-kind-icon">error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="getcharacterbulkresponse.html#result" class="tsd-kind-icon">result</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="getcharacterbulkresponse.html#severity" class="tsd-kind-icon">severity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getcharacterbulkresponse.html#wait" class="tsd-kind-icon">wait</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,11 +105,12 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="callerid" class="tsd-anchor"></a>
 					<h3>caller<wbr>Id</h3>
 					<div class="tsd-signature tsd-kind-icon">caller<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="hloapiresponse.html">HLOApiResponse</a>.<a href="hloapiresponse.html#callerid">callerId</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L26">src/interactions.ts:26</a></li>
 						</ul>
@@ -128,10 +122,26 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="characters" class="tsd-anchor"></a>
+					<h3>characters</h3>
+					<div class="tsd-signature tsd-kind-icon">characters<span class="tsd-signature-symbol">:</span> <a href="getcharacterindividualresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">GetCharacterIndividualResponse</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L186">src/interactions.ts:186</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Array of one or more objects with the property structure defined above.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="error" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> error</h3>
 					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="hloapiresponse.html">HLOApiResponse</a>.<a href="hloapiresponse.html#error">error</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L39">src/interactions.ts:39</a></li>
 						</ul>
@@ -143,11 +153,12 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="result" class="tsd-anchor"></a>
 					<h3>result</h3>
 					<div class="tsd-signature tsd-kind-icon">result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="hloapiresponse.html">HLOApiResponse</a>.<a href="hloapiresponse.html#result">result</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L30">src/interactions.ts:30</a></li>
 						</ul>
@@ -158,11 +169,12 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="severity" class="tsd-anchor"></a>
 					<h3>severity</h3>
 					<div class="tsd-signature tsd-kind-icon">severity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="hloapiresponse.html">HLOApiResponse</a>.<a href="hloapiresponse.html#severity">severity</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L34">src/interactions.ts:34</a></li>
 						</ul>
@@ -170,6 +182,21 @@
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Severity level of the result, which will be one of a fewset values.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="wait" class="tsd-anchor"></a>
+					<h3>wait</h3>
+					<div class="tsd-signature tsd-kind-icon">wait<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mdreier/hlo-api-client/blob/ff2d55b/src/interactions.ts#L181">src/interactions.ts:181</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Minimum interval that the caller must wait until making another retrieval request to the API (inmilliseconds).</p>
 						</div>
 					</div>
 				</section>
@@ -221,9 +248,33 @@
 					<li class=" tsd-kind-interface">
 						<a href="getcharacterbulkrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Bulk<wbr>Request</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="getcharacterbulkresponse.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Bulk<wbr>Response</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="getcharacterbulkresponse.html#callerid" class="tsd-kind-icon">caller<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="getcharacterbulkresponse.html#characters" class="tsd-kind-icon">characters</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="getcharacterbulkresponse.html#error" class="tsd-kind-icon">error</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="getcharacterbulkresponse.html#result" class="tsd-kind-icon">result</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="getcharacterbulkresponse.html#severity" class="tsd-kind-icon">severity</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="getcharacterbulkresponse.html#wait" class="tsd-kind-icon">wait</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="getcharacterindividualrequest.html" class="tsd-kind-icon">Get<wbr>Character<wbr>Individual<wbr>Request</a>
 					</li>
@@ -239,27 +290,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="hloapirequest.html" class="tsd-kind-icon">HLOApi<wbr>Request</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="hloapiresponse.html" class="tsd-kind-icon">HLOApi<wbr>Response</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#callerid" class="tsd-kind-icon">caller<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#error" class="tsd-kind-icon">error</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#result" class="tsd-kind-icon">result</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="hloapiresponse.html#severity" class="tsd-kind-icon">severity</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="itempathfinder2.html" class="tsd-kind-icon">Item<wbr>Pathfinder2</a>
 					</li>
