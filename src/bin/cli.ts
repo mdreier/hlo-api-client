@@ -4,7 +4,6 @@ import fs from 'fs';
 import os from 'os';
 import HLOApi from '../api.js';
 import { CharacterChangeStatus, Severity } from '../constants.js'
-import { AcquireAccessTokenRequest } from '../interactions.js';
 
 type MainLoopResponse = {
     action: string
@@ -52,7 +51,7 @@ export default class HLOCli {
         this.userToken = userToken;
         this.api = new HLOApi({userToken, accessToken, autoTokenHandling: true, toolName: TOOLNAME});
         if (!accessToken) {
-            void this.api.acquireAccessToken({} as any as AcquireAccessTokenRequest);
+            void this.api.acquireAccessToken();
         }
     }
 

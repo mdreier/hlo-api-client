@@ -212,12 +212,12 @@ class HLOApi {
      * @param setAccessToken Set the new access token for this API instance if the request was successful.
      * @returns Response data.
      */
-    async acquireAccessToken(request: AcquireAccessTokenRequest, setAccessToken = true): Promise<AcquireAccessTokenResponse> {
-        if (request.toolName === undefined) {
-            request.toolName = this.configuration.toolName;
-        }
-        if (request.refreshToken === undefined) {
-            request.refreshToken = this.configuration.userToken;
+    async acquireAccessToken(request?: AcquireAccessTokenRequest, setAccessToken = true): Promise<AcquireAccessTokenResponse> {
+        if (!request) {
+            request = {
+                toolName: this.configuration.toolName,
+                refreshToken: this.configuration.userToken
+            }
         }
         const response = await this.sendRequest("/access/acquire-access-token", request) as AcquireAccessTokenResponse;
         if (setAccessToken && response.severity === Severity.Success && response.accessToken) {
@@ -260,14 +260,27 @@ class HLOApi {
      * @param request Request data.
      * @returns Response data.
      */
-    async verifyAccessToken(request: HLOApiRequest): Promise<HLOApiResponse> {
-        if (!request.accessToken) {
-            request.accessToken = this.configuration.accessToken;
+    async verifyAccessToken(request?: HLOApiRequest): Promise<HLOApiResponse> {
+        if (!request) {
+            request = {
+                accessToken: this.configuration.accessToken
+            }
         }
         return this.sendRequest('/access/verify-access-token', request);
     }
 
-    async getCharacter(request: GetCharacterRequest): Promise<GetCharacterResponse> {
+    /**
+     * Read a single character.
+     *
+     * @param request Element token or full request.
+     * @returns Response data with character information.
+     */
+    async getCharacter(request: GetCharacterRequest | string): Promise<GetCharacterResponse> {
+        if (typeof request !== 'object') {
+            request = {
+                elementToken: String(request)
+            }
+        }
         return this.sendRequestWithTokenHandling('/character/get', request) as Promise<GetCharacterResponse>
     }
 

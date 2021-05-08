@@ -2,7 +2,6 @@
 import HLOApi from '../src/api.js';
 import { ResultCode, Severity } from '../src/constants.js'
 import { HLOApiError } from '../src/error.js';
-import { AcquireAccessTokenRequest } from '../src/interactions.js';
 import { describe, it } from '../test/jasmine.js'
 import ApiMock, { Tokens } from './helpers/hloApiMock.js'
 
@@ -35,18 +34,18 @@ describe('Access Tokens', () => {
     });
 
     it('Configured tool name should be used', async () => {
-        const response = await createApi(Tokens.valid.user).acquireAccessToken({refreshToken: Tokens.valid.user} as any as AcquireAccessTokenRequest);
+        const response = await createApi(Tokens.valid.user).acquireAccessToken();
         expect(response.severity).toBe(Severity.Success);
     });
 
     it('Valid access token should be verified', async () => {
-        const response = await createApi(Tokens.valid.user).setAccessToken(Tokens.valid.access).verifyAccessToken({});
+        const response = await createApi(Tokens.valid.user).setAccessToken(Tokens.valid.access).verifyAccessToken();
         expect(response.severity).toBe(Severity.Success);
         expect(response.result).toBe(0);
     });
 
     it('Invalid access token should not be verified', async () => {
-        const response = await createApi(Tokens.valid.user).setAccessToken(Tokens.invalid.access).verifyAccessToken({});
+        const response = await createApi(Tokens.valid.user).setAccessToken(Tokens.invalid.access).verifyAccessToken();
         expect(response.severity).toBe(Severity.Error);
         expect(response.result).toBe(ResultCode.BadApiToken);
     });
@@ -54,12 +53,12 @@ describe('Access Tokens', () => {
 
 describe('Automated token handling', () => {
     it('Missing access token should be requested', async () => {
-        const response = await createApi(Tokens.valid.user, true).getCharacter({elementToken: Tokens.valid.singleCharacter});
+        const response = await createApi(Tokens.valid.user, true).getCharacter(Tokens.valid.singleCharacter);
         expect(response.severity).toBe(Severity.Success);
     });
 
     it('Invalid access token should be refreshed', async () => {
-        const response = await createApi(Tokens.valid.user, true).setAccessToken(Tokens.invalid.access).getCharacter({elementToken: Tokens.valid.singleCharacter});
+        const response = await createApi(Tokens.valid.user, true).setAccessToken(Tokens.invalid.access).getCharacter(Tokens.valid.singleCharacter);
         expect(response.severity).toBe(Severity.Success);
     });
 
